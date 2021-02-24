@@ -6,7 +6,7 @@
 #    By: anastasia <anastasia@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/23 19:16:42 by anastasia         #+#    #+#              #
-#    Updated: 2021/02/23 20:55:30 by anastasia        ###   ########.fr        #
+#    Updated: 2021/02/24 18:39:10 by anastasia        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS_DIR		=	./srcs/
 OBJS_DIR		=	./objs/
 LIBFT_DIR		=	./libft/
 
-INC				=	./includes
+I_INC			=	-I ./includes/ -I ./libft/ 
 
 RM 				=	rm -rf
 
@@ -36,13 +36,13 @@ all:				$(NAME)
 
 OBJ				=	$(SRC:.c=.o)
 
-$(OBJS_DIR)%.o:		$(SRCS_DIR)%.c $(INC)
+$(OBJS_DIR)%.o:		$(SRCS_DIR)%.c ./includes/cub3d.h
 					mkdir -p $(OBJS_DIR)
-					$(CC) $(CFLAGS) -I $(INC)/ -c $< -o $@
+					$(CC) $(CFLAGS) -c $< -o $@ $(I_INC)
 
-$(NAME):			$(OBJS)
+$(NAME):			$(OBJS) ./includes/cub3d.h
 					$(LIBFT)
-					$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L $(LIBFT_DIR) -lft -I $(INC)
+					$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L $(LIBFT_DIR) -lft $(I_INC) 
 
 clean:
 					$(RM) $(OBJS_DIR)
