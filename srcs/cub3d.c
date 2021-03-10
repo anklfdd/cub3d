@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anastasia <anastasia@student.42.fr>        +#+  +:+       +#+        */
+/*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 19:22:27 by anastasia         #+#    #+#             */
-/*   Updated: 2021/03/10 18:01:42 by anastasia        ###   ########.fr       */
+/*   Updated: 2021/03/10 18:59:48 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	main(int argc, char **argv)
 	{
 		if (ft_strncmp(&(argv[1][ft_strlen(argv[1]) - 4]), ".cub", 4) == 0)
 		{
-			printf("OK\n");
 			if (ft_parser(argv[1], map) == 0)
 				printf("OK\n");
 			else
@@ -32,7 +31,6 @@ int	main(int argc, char **argv)
 	{
 		if (ft_strncmp(&(argv[1][ft_strlen(argv[1]) - 4]), ".cub", 4) == 0)
 		{
-			printf("OK\n");
 			if (ft_strncmp(argv[2], "--save", 6) == 0)
 				printf("screen ok\n");
 		}

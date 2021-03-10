@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anastasia <anastasia@student.42.fr>        +#+  +:+       +#+        */
+/*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 17:43:38 by anastasia         #+#    #+#             */
-/*   Updated: 2021/03/10 17:41:34 by anastasia        ###   ########.fr       */
+/*   Updated: 2021/03/10 18:58:23 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct	s_map
 	t_window	win;
 }				t_map;
 
-int ft_parser(char *fname, t_map *map);
+int				ft_parser(char *fname, t_map *map);
+void			ft_error(int code);
 
 #endif
