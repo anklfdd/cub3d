@@ -6,7 +6,7 @@
 /*   By: anastasia <anastasia@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:48:55 by gavril            #+#    #+#             */
-/*   Updated: 2021/02/23 19:14:37 by anastasia        ###   ########.fr       */
+/*   Updated: 2021/03/10 17:17:49 by anastasia        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ char				**ft_split(char const *s, char c);
 size_t				ft_strlcat(char *dst, const char *src, size_t sz);
 size_t				ft_strlcpy(char *dst, const char *src, size_t sz);
 size_t				ft_strlen(const char *str);
+size_t				ft_count(long int n);
 t_list				*ft_lstnew(void *content);
 t_list				*ft_lstlast(t_list *lst);
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anastasia <anastasia@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 19:39:56 by gavril            #+#    #+#             */
-/*   Updated: 2020/11/17 21:30:22 by gavril           ###   ########.fr       */
+/*   Updated: 2021/03/10 17:17:27 by anastasia        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static char		*ft_strcpy(char *dst, char *src)
 	return (dst);
 }
 
-static size_t	ft_count(long int n)
+size_t			ft_count(long int n)
 {
 	size_t		count;
 

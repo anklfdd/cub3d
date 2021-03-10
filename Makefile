@@ -6,13 +6,14 @@
 #    By: anastasia <anastasia@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/23 19:16:42 by anastasia         #+#    #+#              #
-#    Updated: 2021/02/24 18:39:10 by anastasia        ###   ########.fr        #
+#    Updated: 2021/03/10 16:03:03 by anastasia        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	cub3d
 
 SRC				=	cub3d.c \
+					parser.c \
 			
 
 SRCS			=	$(addprefix $(SRCS_DIR), $(SRC))

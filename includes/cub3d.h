@@ -6,20 +6,23 @@
 /*   By: anastasia <anastasia@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 17:43:38 by anastasia         #+#    #+#             */
-/*   Updated: 2021/02/24 19:21:44 by anastasia        ###   ########.fr       */
+/*   Updated: 2021/03/10 17:41:34 by anastasia        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+# define DISP_W 1920
+# define DISP_H 1080
 # include "libft.h"
 # include <stdio.h>
 # include <stddef.h>
+# include <fcntl.h>
 
 typedef struct	s_window
 {
 	int			width;
-	int			hide;
+	int			height;
 }				t_window;
 
 typedef struct	s_wall
@@ -44,5 +47,7 @@ typedef struct	s_map
 	t_wall		wall;
 	t_window	win;
 }				t_map;
+
+int ft_parser(char *fname, t_map *map);
 
 #endif
