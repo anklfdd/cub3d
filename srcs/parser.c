@@ -6,13 +6,13 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 22:07:07 by anastasia         #+#    #+#             */
-/*   Updated: 2021/03/10 20:33:22 by gavril           ###   ########.fr       */
+/*   Updated: 2021/03/11 20:57:31 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_cnt_words(char **word)
+int		ft_cnt_words(char **word)
 {
 	int		i;
 
@@ -22,12 +22,12 @@ int	ft_cnt_words(char **word)
 	return (i);
 }
 
-int	ft_r(char **word, t_window *win)
+int		ft_r(char **word, t_window *win)
 {
 	if (ft_cnt_words(word) != 3)
 		return (1);
 	win->width = ft_atoi(word[1]);
-	win->height = ft_atoi(word[2]);	
+	win->height = ft_atoi(word[2]);
 	if (ft_count(win->width) == ft_strlen(word[1]) && win->width > 0)
 	{
 		if (win->width > DISP_W)
@@ -45,7 +45,7 @@ int	ft_r(char **word, t_window *win)
 	return (0);
 }
 
-int	ft_wall(char **word, char **wall)
+int		ft_wall(char **word, char **wall)
 {
 	int fd;
 
@@ -61,42 +61,33 @@ int	ft_wall(char **word, char **wall)
 	return (0);
 }
 
-int	ft_color(char **word, int *color)
+int		ft_color(char **word, int *color)
 {
-	// int r;
-	// int g;
-	// int b;
 	int		i;
-	int		tmp_color;
+	int		tmp_clr;
 	char	**clr;
+	int		err;
 
-	if (ft_cnt_words(word) != 2)
-		return (1);
-	clr = ft_split(word[1], ',');
-	if (ft_cnt_words(clr) != 3)
-		return (1);
-	// r = ft_atoi(clr[0]);
-	// g = ft_atoi(clr[1]);
-	// b = ft_atoi(clr[2]);
-	// *color = (r << 16) | (g << 8) | b;
-	// printf("%d\n", *color);
 	i = 0;
-	*color = 0;
-	while (i < 3)
+	err = 0;
+	clr = ft_split(word[1], ',');
+	if (ft_cnt_words(word) != 2 || ft_cnt_words(clr) != 3)
+		err = 1;
+	while (clr[i])
 	{
-		tmp_color = ft_atoi(clr[i]);
-		if (ft_count(tmp_color) == ft_strlen(clr[i]) && tmp_color >= 0 && tmp_color < 256)
-			*color |= tmp_color << ((2 - i) * 8);
+		tmp_clr = ft_atoi(clr[i]);
+		if (ft_count(tmp_clr) == ft_strlen(clr[i])
+		&& tmp_clr >= 0 && tmp_clr <= 255)
+			*color |= tmp_clr << ((2 - i) * 8);
 		else
-			return (2);
+			err = 2;
 		i++;
 	}
-	// printf("%d\n", *color);
-	return (0);
+	ft_free_w(clr);
+	return (err);
 }
 
-//Обработать если нет флага и нет карты, то ошибка
-int	ft_check_flag(char **word, t_map *map)
+int		ft_check_flag(char **word, t_map *map)
 {
 	if (ft_strncmp(word[0], "R", 1) == 0)
 		return (ft_r(word, &(map->win)));
@@ -114,48 +105,52 @@ int	ft_check_flag(char **word, t_map *map)
 		return (ft_color(word, &(map->color.f)));
 	else if (ft_strncmp(word[0], "C", 1) == 0)
 		return (ft_color(word, &(map->color.c)));
-	//здесь поменять на код ошибки
-	return (0);
+	return (4);
 }
 
-int	ft_check_line(char *line, t_map *map)
+int		ft_check_line(char *line, t_map *map)
 {
 	char	**word;
 	int		err;
-	
+
 	word = ft_split(line, ' ');
-	// обработать ошибки (при return 1)
-	if ((err = ft_check_flag(word, map)) == 0) // если первое слово норм, идем дальше
-	{
-		err = 0;
-		// printf("%d %d", map->win.width, map->win.height);
-	}
-	// else if ((err = ft_check_map()) == 0)
-	// {
-		// 
-	// }
-	else
+	if ((err = ft_check_flag(word, map)) != 0)
 		ft_error(err);
-	// free(word);
-	return (0);
+	ft_free_w(word);
+	return (err);
 }
 
-
-//обработать пустые строки
-int ft_parser(char *fname, t_map *map)
+int		ft_check_map(char *line, t_map *map)
 {
-	int fd;
-	char *line;
+	int err;
+
+	err = 0;
+	ft_error(err);
+	return (err);
+}
+
+int		ft_parser(char *fname, t_map *map)
+{
+	int		fd;
+	char	*line;
+	int		c_flag;
+	int		err;
 
 	fd = open(fname, O_RDONLY);
-	// t_list
 	line = NULL;
+	c_flag = 0;
+	err = 1;
 	while (get_next_line(fd, &line) > 0)
 	{
-		ft_check_line(line, map);
-		// free(line);
+		if (*line == '\0')
+			continue ;
+		if (c_flag++ < 8 && ft_check_line(line, map) == 0)
+			err = 0;
+		else if (ft_check_map(line, map) == 0)
+			err = 0;
+		free(line);
 	}
-	get_next_line(fd, &line);
-	// printf("%d %d\n", map->color.c, map->color.f);
-	return (0);
+	free(line);
+	line = NULL;
+	return (err);
 }

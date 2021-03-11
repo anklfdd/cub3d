@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anastasia <anastasia@student.42.fr>        +#+  +:+       +#+        */
+/*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:48:55 by gavril            #+#    #+#             */
-/*   Updated: 2021/03/10 17:17:49 by anastasia        ###   ########.fr       */
+/*   Updated: 2021/03/11 19:32:22 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void				ft_lstadd_back(t_list **lst, t_list *new);
 void				ft_lstdelone(t_list *lst, void (*del)(void*));
 void				ft_lstclear(t_list **lst, void (*del)(void*));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
+void				ft_free_w(char **word);
 char				*ft_strchr(const char *str, int sym);
 char				*ft_strdup(const char *str);
 char				*ft_itoa(int n);

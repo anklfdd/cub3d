@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 19:22:27 by anastasia         #+#    #+#             */
-/*   Updated: 2021/03/10 18:59:48 by gavril           ###   ########.fr       */
+/*   Updated: 2021/03/11 20:43:44 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@ int	main(int argc, char **argv)
 			if (ft_parser(argv[1], map) == 0)
 				printf("OK\n");
 			else
-				printf("pars error\n");
+			{
+				// sleep(999);
+				printf("NOT OK\n");
+				exit(1);
+			}
 		}
 	}
 	else if (argc == 3)
@@ -38,5 +42,6 @@ int	main(int argc, char **argv)
 	else
 		ft_putstr_fd("Что-то не подал, дружок", 0);
 	// free(map);
+	// sleep(9999);
 	return (0);
 }

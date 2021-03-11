@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 18:51:54 by gavril            #+#    #+#             */
-/*   Updated: 2021/03/10 20:02:06 by gavril           ###   ########.fr       */
+/*   Updated: 2021/03/11 19:47:24 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ void	ft_error(int code)
 		ft_putstr_fd("Неверный формат\n", 2);
 	if (code == 3)
 		ft_putstr_fd("Файл не существует\n", 2);
-	// if (code == 4)
+	if (code == 4)
+		ft_putstr_fd("Нет одного из флагов\n", 2);
 	// if (code == 5)
 	// if (code == 5)
 	// if (code == 6)
-	exit (1);
+	// exit (1);
 }
