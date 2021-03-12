@@ -6,7 +6,7 @@
 #    By: gavril <gavril@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/23 19:16:42 by anastasia         #+#    #+#              #
-#    Updated: 2021/03/10 18:58:38 by gavril           ###   ########.fr        #
+#    Updated: 2021/03/12 20:34:04 by gavril           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ CC				=	gcc
 
 CFLAGS			=	-Wall -Wextra -Werror
 
-LIBFT			=	@make -sC $(LIBFT_DIR)
+LIBFT			=	@make bonus -sC $(LIBFT_DIR)
 
 all:				$(NAME)
 

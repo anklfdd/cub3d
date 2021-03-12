@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 22:07:07 by anastasia         #+#    #+#             */
-/*   Updated: 2021/03/11 20:57:31 by gavril           ###   ########.fr       */
+/*   Updated: 2021/03/12 20:50:45 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,11 +120,24 @@ int		ft_check_line(char *line, t_map *map)
 	return (err);
 }
 
-int		ft_check_map(char *line, t_map *map)
+int		ft_check_map(t_map *map, t_list **l_map)
 {
-	int err;
+	int		err;
+	t_list *tmp;
+	int i;
 
 	err = 0;
+	tmp = *l_map;
+	i = -1;
+	map->map = (char **)malloc(sizeof(char *) * (ft_lstsize(*l_map) + 1));
+	while (tmp)
+	{
+		map->map[++i] = tmp->content;
+		tmp = tmp->next;
+	}
+	i = -1;
+	while (map->map[++i])
+		ft_putendl_fd(map->map[i], 1);
 	ft_error(err);
 	return (err);
 }
@@ -135,22 +148,26 @@ int		ft_parser(char *fname, t_map *map)
 	char	*line;
 	int		c_flag;
 	int		err;
+	t_list	*l_map;
 
 	fd = open(fname, O_RDONLY);
 	line = NULL;
 	c_flag = 0;
-	err = 1;
+	err = 0;
+	l_map = NULL;
 	while (get_next_line(fd, &line) > 0)
 	{
 		if (*line == '\0')
 			continue ;
-		if (c_flag++ < 8 && ft_check_line(line, map) == 0)
-			err = 0;
-		else if (ft_check_map(line, map) == 0)
-			err = 0;
-		free(line);
+		if (c_flag++ < 8)
+		{
+			err += ft_check_line(line, map);
+			free(line);
+		}
+		else
+			ft_lstadd_back(&l_map, ft_lstnew(line));
 	}
-	free(line);
-	line = NULL;
+	ft_lstadd_back(&l_map, ft_lstnew(line));
+	ft_check_map(map, &l_map);
 	return (err);
 }
