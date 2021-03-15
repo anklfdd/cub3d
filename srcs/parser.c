@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 22:07:07 by anastasia         #+#    #+#             */
-/*   Updated: 2021/03/12 20:50:45 by gavril           ###   ########.fr       */
+/*   Updated: 2021/03/12 20:52:51 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,11 +122,11 @@ int		ft_check_line(char *line, t_map *map)
 
 int		ft_check_map(t_map *map, t_list **l_map)
 {
-	int		err;
+	// int		err;
 	t_list *tmp;
 	int i;
 
-	err = 0;
+	// err = 0;
 	tmp = *l_map;
 	i = -1;
 	map->map = (char **)malloc(sizeof(char *) * (ft_lstsize(*l_map) + 1));
@@ -138,8 +138,8 @@ int		ft_check_map(t_map *map, t_list **l_map)
 	i = -1;
 	while (map->map[++i])
 		ft_putendl_fd(map->map[i], 1);
-	ft_error(err);
-	return (err);
+	// ft_error(err);
+	return (0);
 }
 
 int		ft_parser(char *fname, t_map *map)

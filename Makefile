@@ -6,7 +6,7 @@
 #    By: gavril <gavril@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/23 19:16:42 by anastasia         #+#    #+#              #
-#    Updated: 2021/03/12 20:34:04 by gavril           ###   ########.fr        #
+#    Updated: 2021/03/15 20:15:36 by gavril           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,11 +39,11 @@ OBJ				=	$(SRC:.c=.o)
 
 $(OBJS_DIR)%.o:		$(SRCS_DIR)%.c ./includes/cub3d.h
 					mkdir -p $(OBJS_DIR)
-					$(CC) $(CFLAGS) -c $< -o $@ $(I_INC)
+					$(CC) $(CFLAGS) -c $< -o $@ $(I_INC) -Imlx
 
 $(NAME):			$(OBJS) ./includes/cub3d.h
 					$(LIBFT)
-					$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L $(LIBFT_DIR) -lft $(I_INC) 
+					$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -Lmlx -lmlx -framework OpenGL -framework AppKit -L $(LIBFT_DIR) -lft $(I_INC) 
 
 clean:
 					$(RM) $(OBJS_DIR)
