@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 22:07:07 by anastasia         #+#    #+#             */
-/*   Updated: 2021/03/17 20:48:53 by gavril           ###   ########.fr       */
+/*   Updated: 2021/03/21 20:42:09 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,15 +120,54 @@ int		ft_check_line(char *line, t_map *map)
 	return (err);
 }
 
-int		ft_check_map(t_map *map, t_list **l_map)
+int		ft_strchar(const char *str, int sym)
 {
-	// int		err;
-	t_list *tmp;
+	int	ind;
+
+	ind = 0;
+	if (!str || !sym)
+		return (0);
+	while (str[ind] != '\0')
+	{
+		if (str[ind] == sym)
+			return (ind + 1);
+		ind++;
+	}
+	if (sym == '\0')
+		return (ind + 1);
+	return (0);
+}
+
+int		ft_check_sym(char *map, int *plr)
+{
 	int i;
 
-	// err = 0;
+	i = 0;
+	while (map[i])
+	{
+		if (ft_strchar("NSWE012 ", map[i]) != 0)
+		{
+			if (ft_strchar("NSWE", map[i]) != 0)
+				*plr += 1;
+			i++;
+		}
+		else
+			return (5);
+	}
+	return (0);
+}
+
+int		ft_check_map(t_map *map, t_list **l_map)
+{
+	int		err;
+	t_list *tmp;
+	int i;
+	int plr;
+
+	err = 0;
 	tmp = *l_map;
 	i = -1;
+	plr = 0;
 	map->map = (char **)malloc(sizeof(char *) * (ft_lstsize(*l_map) + 1));
 	while (tmp)
 	{
@@ -138,8 +177,16 @@ int		ft_check_map(t_map *map, t_list **l_map)
 	i = -1;
 	while (map->map[++i])
 		ft_putendl_fd(map->map[i], 1);
+	i = 0;
+	while (map->map[i])
+	{
+		err += ft_check_sym(map->map[i], &plr);
+		i++;
+	}
 	// ft_error(err);
-	return (0);
+	if (plr != 1)
+		return (6);
+	return (err);
 }
 
 int		ft_parser(char *fname, t_map *map)
@@ -168,6 +215,7 @@ int		ft_parser(char *fname, t_map *map)
 			ft_lstadd_back(&l_map, ft_lstnew(line));
 	}
 	ft_lstadd_back(&l_map, ft_lstnew(line));
-	ft_check_map(map, &l_map);
+	err = ft_check_map(map, &l_map);
+	ft_error(err);
 	return (err);
 }
