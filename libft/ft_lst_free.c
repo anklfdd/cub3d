@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_lst_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/14 21:05:16 by gavril            #+#    #+#             */
-/*   Updated: 2021/03/22 17:58:14 by gavril           ###   ########.fr       */
+/*   Created: 2021/03/22 17:59:22 by gavril            #+#    #+#             */
+/*   Updated: 2021/03/22 18:11:25 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+void	ft_lst_free(t_list **lst)
 {
-	t_list	*new_list;
-	t_list	*new_elem;
+	t_list *clr;
 
-	if (!lst || !f)
-		return (0);
-	new_list = 0;
-	while (lst)
+	if (!*lst)
+		return ;
+	while (*lst)
 	{
-		new_elem = ft_lstnew((*f)(lst->content));
-		if (!new_elem)
-		{
-			ft_lstclear(&new_list, del);
-			return (0);
-		}
-		ft_lstadd_back(&new_list, new_elem);
-		lst = lst->next;
+		clr = (*lst)->next;
+		free(*lst);
+		*lst = clr;
 	}
-	return (new_list);
 }

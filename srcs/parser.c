@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 22:07:07 by anastasia         #+#    #+#             */
-/*   Updated: 2021/03/21 20:42:09 by gavril           ###   ########.fr       */
+/*   Updated: 2021/03/22 21:31:07 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,19 +174,49 @@ int		ft_check_map(t_map *map, t_list **l_map)
 		map->map[++i] = tmp->content;
 		tmp = tmp->next;
 	}
-	i = -1;
-	while (map->map[++i])
-		ft_putendl_fd(map->map[i], 1);
 	i = 0;
 	while (map->map[i])
 	{
-		err += ft_check_sym(map->map[i], &plr);
-		i++;
+		if ((err = ft_check_sym(map->map[i++], &plr)) == 5)
+			break ;
 	}
-	// ft_error(err);
-	if (plr != 1)
-		return (6);
+	if (plr != 1 || err == 5)
+		ft_error(err = 5);
 	return (err);
+}
+
+int		ft_chval(char **map, int x, int y, int xs, int ys, char sym)
+{
+	int i;
+	
+	i = 0;
+	// if (x == xs && y == ys && map[x][y] != '3')
+	// 	map[x][y] = '3';
+	if (x == xs && y == ys && sym != 's')
+		return (0);
+	ft_putnbr_fd(x, 1);
+	write(1, " = x\n", 5);
+	ft_putnbr_fd(y, 1);
+	write(1, " = y\n\n", 6);
+	write(1, &sym, 1);
+	if ((int)ft_strlen(map[x]) > y + 1 && map[x][y + 1] == '1' && sym != 'l')
+		if (ft_chval(map, x, y + 1, xs, ys, 'r') == 0)
+			return (0);
+	if (map[x + 1] != NULL && (int)ft_strlen(map[x + 1]) - 1 >= y && map[x + 1][y] == '1' && sym != 'u')
+		if (ft_chval(map, x + 1, y, xs, ys, 'd') == 0)
+			return (0);
+	if (x - 1 >= 0 && (int)ft_strlen(map[x - 1]) > y && map[x - 1][y] == '1' && sym != 'd')
+		if (ft_chval(map, x - 1, y, xs, ys, 'u') == 0)
+			return (0);
+	if (y - 1 >= 0 && map[x][y - 1] == '1' && sym != 'r')
+		if (ft_chval(map, x, y - 1, xs, ys, 'l') == 0)
+			return (0);
+	// if (map[x][y] == '3')
+	// {
+	// 	map[x][y] = '1';
+	// 	return (0);
+	// }
+	return (22);
 }
 
 int		ft_parser(char *fname, t_map *map)
@@ -215,7 +245,11 @@ int		ft_parser(char *fname, t_map *map)
 			ft_lstadd_back(&l_map, ft_lstnew(line));
 	}
 	ft_lstadd_back(&l_map, ft_lstnew(line));
-	err = ft_check_map(map, &l_map);
-	ft_error(err);
+	// map->xs = x; map->ys = y; map[x][y] == '1'
+	
+	if ((err += ft_check_map(map, &l_map)) != 0 || ((err += ft_chval(map->map, 0, 0, 0, 0, 's')) != 0))
+		ft_free_w(map->map);
+	ft_lst_free(&l_map);
 	return (err);
 }
+

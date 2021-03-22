@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:48:55 by gavril            #+#    #+#             */
-/*   Updated: 2021/03/15 20:05:25 by gavril           ###   ########.fr       */
+/*   Updated: 2021/03/22 18:00:48 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void				ft_lstdelone(t_list *lst, void (*del)(void*));
 void				ft_lstclear(t_list **lst, void (*del)(void*));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 void				ft_free_w(char **word);
+void				ft_lst_free(t_list **lst);
 char				*ft_strchr(const char *str, int sym);
 char				*ft_strdup(const char *str);
 char				*ft_itoa(int n);

@@ -6,7 +6,7 @@
 #    By: gavril <gavril@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/29 19:22:08 by alancel           #+#    #+#              #
-#    Updated: 2021/03/11 19:30:04 by gavril           ###   ########.fr        #
+#    Updated: 2021/03/22 18:00:59 by gavril           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ SRCS		=	ft_memset.c \
 				get_next_line.c \
 				get_next_line_utils.c \
 				ft_free.c \
+				ft_lst_free.c
 
 CC			=	gcc
 	

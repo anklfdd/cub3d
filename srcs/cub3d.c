@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 19:22:27 by anastasia         #+#    #+#             */
-/*   Updated: 2021/03/17 20:51:21 by gavril           ###   ########.fr       */
+/*   Updated: 2021/03/22 21:37:46 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int argc, char **argv)
 			}
 			else
 			{
-				// sleep(999);
+				sleep(999);
 				printf("NOT OK\n");
 				exit(1);
 			}

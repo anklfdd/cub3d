@@ -6,7 +6,7 @@
 #    By: gavril <gavril@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/23 19:16:42 by anastasia         #+#    #+#              #
-#    Updated: 2021/03/17 20:13:02 by gavril           ###   ########.fr        #
+#    Updated: 2021/03/22 21:12:59 by gavril           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ $(OBJS_DIR)%.o:		$(SRCS_DIR)%.c ./includes/cub3d.h
 
 $(NAME):			$(OBJS) ./includes/cub3d.h
 					$(LIBFT)
-					$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -Lmlx -lmlx -framework OpenGL -framework AppKit -L $(LIBFT_DIR) -lft $(I_INC) 
+					$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -Lmlx -lmlx -framework OpenGL -framework AppKit -L $(LIBFT_DIR) -lft $(I_INC)
 
 clean:
 					$(RM) $(OBJS_DIR)
