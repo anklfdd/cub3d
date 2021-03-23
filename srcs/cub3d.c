@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 19:22:27 by anastasia         #+#    #+#             */
-/*   Updated: 2021/03/22 21:37:46 by gavril           ###   ########.fr       */
+/*   Updated: 2021/03/23 19:16:03 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 	map = (t_map *)malloc(sizeof(t_map));
 	if (argc == 2)
 	{
-		printf("%d\n", ft_strncmp(&(argv[1][ft_strlen(argv[1]) - 4]), ".cub", 4));
+		// printf("%d\n", ft_strncmp(&(argv[1][ft_strlen(argv[1]) - 4]), ".cub", 4)); //ft_printf
 		if (ft_strncmp(&(argv[1][ft_strlen(argv[1]) - 4]), ".cub", 4) == 0)
 		{
 			if (ft_parser(argv[1], map) == 0)
@@ -29,8 +29,8 @@ int	main(int argc, char **argv)
 			}
 			else
 			{
-				sleep(999);
-				printf("NOT OK\n");
+				// sleep(999);
+				printf("NOT OK\n"); // ft_printf
 				exit(1);
 			}
 		}

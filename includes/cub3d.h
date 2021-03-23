@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 17:43:38 by anastasia         #+#    #+#             */
-/*   Updated: 2021/03/21 20:44:49 by gavril           ###   ########.fr       */
+/*   Updated: 2021/03/23 21:00:41 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,12 @@ typedef struct	s_color
 	int			c;
 }				t_color;
 
+typedef struct	s_plr
+{
+	double		x;
+	double		y;
+}				t_plr;
+
 typedef struct	s_map
 {
 	char		**map;
@@ -59,6 +65,7 @@ typedef struct	s_map
 	t_wall		wall;
 	t_window	win;
 	t_mlx		mlx;
+	t_plr		plr;
 }				t_map;
 
 int				ft_parser(char *fname, t_map *map);
