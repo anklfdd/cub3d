@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 20:04:19 by gavril            #+#    #+#             */
-/*   Updated: 2021/03/17 20:58:47 by gavril           ###   ########.fr       */
+/*   Updated: 2021/03/25 20:05:50 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,15 @@ int		ft_close(int param)
 int		key_press(int keycode, int param)
 {
 	(void)param;
-	if (keycode == 53)
+	if (keycode == 53) // close
 		exit(0);
+	// if (keycode == 13) // W
+	// if (keycode == 0) // A
+	// if (keycode == 1) // S
+	// if (keycode == 2) // D
+	// if (keycode == 123) // <
+	// if (keycode == 124) // >
+
 	return (0);
 }
 
@@ -51,5 +58,6 @@ void	init_mlx(t_map	*map)
 	// mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img, 0, 0);
 	mlx_hook(map->mlx.mlx_win, 17, 0, ft_close, 0);
 	mlx_hook(map->mlx.mlx_win, 2, 0, key_press, 0);
+
 	mlx_loop(map->mlx.mlx);
 }

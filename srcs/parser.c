@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 22:07:07 by anastasia         #+#    #+#             */
-/*   Updated: 2021/03/23 21:12:07 by gavril           ###   ########.fr       */
+/*   Updated: 2021/03/25 20:15:55 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,37 +138,6 @@ int		ft_strchar(const char *str, int sym)
 	return (0);
 }
 
-int		ft_check_sym(t_plr *plr, char **map, int *pl)
-{
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while(map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (ft_strchar("NSWE412 ", map[i][j]) != 0)
-			{
-				if (ft_strchar("NSWE", map[i][j]) != 0)
-				{
-					plr->x = i;
-					plr->y = j;
-					// сохранить вектор направления
-					*pl += 1;
-				}
-				j++;
-			}
-			else
-				return (5);
-		}
-		i++;
-	}
-	return (0);
-}
-
 int		ft_chval(char **map, int x, int y)
 {
 	int i;
@@ -197,6 +166,39 @@ int		ft_chval(char **map, int x, int y)
 			return (1);
 
 	return (0);
+}
+
+int		ft_check_sym(t_plr *plr, char **map, int *pl)
+{
+	int i;
+	int j;
+	int err;
+
+	i = 0;
+	j = 0;
+	err = 0;
+	while(map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (ft_strchar("NSWE412 ", map[i][j]) != 0)
+			{
+				if (ft_strchar("NSWE", map[i][j]) != 0)
+				{
+					plr->x = i;
+					plr->y = j;
+					// сохранить вектор направления
+					*pl += 1;
+				}
+				j++;
+			}
+			else
+				return (5);
+		}
+		i++;
+	}
+	return (err);
 }
 
 int		ft_check_map(t_map *map, t_list **l_map)
