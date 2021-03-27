@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 17:43:38 by anastasia         #+#    #+#             */
-/*   Updated: 2021/03/23 21:00:41 by gavril           ###   ########.fr       */
+/*   Updated: 2021/03/27 22:03:50 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stddef.h>
 # include <fcntl.h>
 # include <mlx.h>
+# include <math.h>
 
 typedef struct	s_mlx
 {
@@ -56,6 +57,9 @@ typedef struct	s_plr
 {
 	double		x;
 	double		y;
+	double		dirx;
+	double		diry;
+
 }				t_plr;
 
 typedef struct	s_map

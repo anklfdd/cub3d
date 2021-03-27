@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 22:07:07 by anastasia         #+#    #+#             */
-/*   Updated: 2021/03/25 20:15:55 by gavril           ###   ########.fr       */
+/*   Updated: 2021/03/27 22:10:22 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,20 +140,14 @@ int		ft_strchar(const char *str, int sym)
 
 int		ft_chval(char **map, int x, int y)
 {
-	int i;
-	
-	i = 0;
-	// ft_putnbr_fd(x, 1);
-	// write(1, " = x\n", 5);
-	// ft_putnbr_fd(y, 1);
-	// write(1, " = y\n\n", 6);
-	// write(1, &sym, 1);
-	
 	if (map[x][y] == ' ')
 		return (1);
 	map[x][y] = '4';
 	if ((int)ft_strlen(map[x]) > y + 1 && (map[x][y + 1] == '0' || map[x][y + 1] == ' '))
 		if (map[x][y + 2] == '\0' || ft_chval(map, x, y + 1) == 1)
+			return (1);
+	if ((map[x][y - 1] == '0' || map[x][y - 1] == ' '))
+		if (y - 1 == 0 || ft_chval(map, x, y - 1) == 1)
 			return (1);
 	if ((map[x + 1][y] == '0' || map[x + 1][y] == ' '))
 		if (map[x + 2] == NULL || ft_chval(map, x + 1, y) == 1 || (int)ft_strlen(map[x + 2]) <= y)
@@ -161,11 +155,50 @@ int		ft_chval(char **map, int x, int y)
 	if ((map[x - 1][y] == '0' || map[x - 1][y] == ' '))
 		if (x - 1 == 0 || ft_chval(map, x - 1, y) == 1 || (int)ft_strlen(map[x - 2]) <= y)
 			return (1);
-	if ((map[x][y - 1] == '0' || map[x][y - 1] == ' '))
-		if (y - 1 == 0 || ft_chval(map, x, y - 1) == 1)
-			return (1);
-
+	// валидация уголков
 	return (0);
+}
+
+int		ft_chplr(char **map, int i, int j)
+{
+	int res;
+
+	res = 4;
+	if ((int)ft_strlen(map[i]) > j + 1 && ft_strchar("412", map[i][j + 1]) != 0)
+		res -= 1;
+	if (j - 1 >= 0 && ft_strchar("412", map[i][j - 1]) != 0)
+		res -= 1;
+	if (map[i + 2] != NULL && ft_strchar("412", map[i + 1][j]) != 0)
+		res -= 1;
+	if (i - 1 >= 0 && ft_strchar("412", map[i - 1][j]) != 0)
+		res -= 1;
+	return (res);
+}
+
+void		ft_init_plr(char sym, t_plr *plr, int i, int j)
+{
+	plr->x = i;
+	plr->y = j;
+	if (sym == 'N')
+	{
+		plr->dirx = 0;
+		plr->diry = 1;
+	}
+	if (sym == 'S')
+	{
+		plr->dirx = 0;
+		plr->diry = -1;
+	}
+	if (sym == 'W')
+	{
+		plr->dirx = -1;
+		plr->diry = 0;
+	}
+	if (sym == 'E')
+	{
+		plr->dirx = 1;
+		plr->diry = 0;
+	}
 }
 
 int		ft_check_sym(t_plr *plr, char **map, int *pl)
@@ -182,12 +215,14 @@ int		ft_check_sym(t_plr *plr, char **map, int *pl)
 		j = 0;
 		while (map[i][j])
 		{
-			if (ft_strchar("NSWE412 ", map[i][j]) != 0)
+			if (ft_strchar("NSWE4120 ", map[i][j]) != 0)
 			{
+				if (map[i][j] == '0')
+					err += ft_chval(map, i, j); // for error 1
 				if (ft_strchar("NSWE", map[i][j]) != 0)
 				{
-					plr->x = i;
-					plr->y = j;
+					ft_init_plr(map[i][j], plr, i, j);
+					err += ft_chplr(map, i, j);
 					// сохранить вектор направления
 					*pl += 1;
 				}
@@ -218,8 +253,6 @@ int		ft_check_map(t_map *map, t_list **l_map)
 		map->map[++i] = tmp->content;
 		tmp = tmp->next;
 	}
-	i = 0;
-	err += ft_chval(map->map, 1, 1);
 	err += ft_check_sym(&map->plr, map->map, &plr);
 	if (plr != 1 || err != 0)
 		ft_error(err = 5);

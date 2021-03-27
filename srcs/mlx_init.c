@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 20:04:19 by gavril            #+#    #+#             */
-/*   Updated: 2021/03/25 20:05:50 by gavril           ###   ########.fr       */
+/*   Updated: 2021/03/27 22:24:29 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,15 @@ int		ft_close(int param)
 {
     (void)param;
     exit(0);
+}
+
+int ft_rayc(t_map *map)
+{
+	double planex;
+	double planey;
+	
+	planex = 0;
+	planex = 0.66;	
 }
 
 int		key_press(int keycode, int param)
