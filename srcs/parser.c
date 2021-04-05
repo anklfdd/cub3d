@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 22:07:07 by anastasia         #+#    #+#             */
-/*   Updated: 2021/03/30 21:10:32 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/05 20:52:42 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,9 @@ int		ft_chval(char **map, int x, int y)
 	if (map[x][y] == ' ')
 		return (1);
 	map[x][y] = '4';
+	if (map[x + 1][y - 1] == ' ' || map[x - 1][y - 1] == ' ' || map[x + 1][y + 1] == ' ' ||
+	map[x - 1][y + 1] == ' ' || map[x + 1][y + 1] == '\0' || map[x - 1][y + 1] == '\0')
+		return (1);
 	if ((int)ft_strlen(map[x]) > y + 1 && (map[x][y + 1] == '0' || map[x][y + 1] == ' '))
 		if (map[x][y + 2] == '\0' || ft_chval(map, x, y + 1) == 1)
 			return (1);
@@ -155,7 +158,6 @@ int		ft_chval(char **map, int x, int y)
 	if ((map[x - 1][y] == '0' || map[x - 1][y] == ' '))
 		if (x - 1 == 0 || ft_chval(map, x - 1, y) == 1 || (int)ft_strlen(map[x - 2]) <= y)
 			return (1);
-	// валидация уголков
 	return (0);
 }
 
@@ -173,7 +175,7 @@ int		ft_chplr(char **map, int i, int j)
 	if (i - 1 >= 0 && ft_strchar("412", map[i - 1][j]) != 0)
 		res -= 1;
 	return (res);
-}
+} // чекает символы вокруг игрока
 
 void		ft_init_plr(char sym, t_plr *plr, int i, int j)
 {
@@ -223,13 +225,17 @@ int		ft_check_sym(t_plr *plr, char **map, int *pl)
 				{
 					ft_init_plr(map[i][j], plr, i, j);
 					err += ft_chplr(map, i, j);
-					// сохранить вектор направления
 					*pl += 1;
 				}
-				j++;
+			}
+			else if (map[i][0] == '\n')
+			{
+				err += 1;
+				printf("перенос = %d\n", map[i][j]);
 			}
 			else
 				return (5);
+			j++;
 		}
 		i++;
 	}
@@ -290,7 +296,7 @@ int		ft_parser(char *fname, t_map *map)
 	//  || ((err += ft_chval(map->map, 1, 1)) != 0)
 	if ((err += ft_check_map(map, &l_map)) != 0)
 		ft_free_w(map->map);
-	printf("%d", err);
+	// printf("%d", err);
 	// int i = 0;
 	// while (map->map[i])
 	// {
