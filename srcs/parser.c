@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 22:07:07 by anastasia         #+#    #+#             */
-/*   Updated: 2021/04/05 20:52:42 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/07 22:34:16 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,24 +138,41 @@ int		ft_strchar(const char *str, int sym)
 	return (0);
 }
 
+int		ft_angle(char **map, int x, int y)
+{
+	//map[x][y + 2] == '\0' for y + 1
+	if (map[x + 1] != NULL && (int)ft_strlen(map[x + 1]) - 2 >= y && y - 1 >= 0 && map[x + 1][y - 1] == ' ')
+		return (1);
+	if (x - 1 >= 0 && y - 1 >= 0 && map[x - 1][y - 1] == ' ')
+		return (1);
+	if (map[x + 1] != NULL && (int)ft_strlen(map[x + 1]) - 2 >= y && map[x + 1][y + 1] == ' ')
+		return (1);
+	else if (map[x + 1] != NULL && (int)ft_strlen(map[x + 1]) - 2 < y)
+		return (1);
+	if (x - 1 >= 0 && map[x - 1][y + 1] == ' ')
+		return (1);
+	return (0);
+}
+
 int		ft_chval(char **map, int x, int y)
 {
-	if (map[x][y] == ' ')
+	if (map[x][y] == ' ' || ft_angle(map, x, y) == 1)
 		return (1);
 	map[x][y] = '4';
-	if (map[x + 1][y - 1] == ' ' || map[x - 1][y - 1] == ' ' || map[x + 1][y + 1] == ' ' ||
-	map[x - 1][y + 1] == ' ' || map[x + 1][y + 1] == '\0' || map[x - 1][y + 1] == '\0')
-		return (1);
-	if ((int)ft_strlen(map[x]) > y + 1 && (map[x][y + 1] == '0' || map[x][y + 1] == ' '))
+	if ((int)ft_strlen(map[x]) - 1 > y && (map[x][y + 1] == '0' || map[x][y + 1] == ' '))
 		if (map[x][y + 2] == '\0' || ft_chval(map, x, y + 1) == 1)
 			return (1);
-	if ((map[x][y - 1] == '0' || map[x][y - 1] == ' '))
+	if (y - 1 >= 0 && (map[x][y - 1] == '0' || map[x][y - 1] == ' '))
+	{
 		if (y - 1 == 0 || ft_chval(map, x, y - 1) == 1)
 			return (1);
-	if ((map[x + 1][y] == '0' || map[x + 1][y] == ' '))
+	}
+	else if (y - 1 < 0)
+		return (1);
+	if (map[x + 1] != NULL && (map[x + 1][y] == '0' || map[x + 1][y] == ' '))
 		if (map[x + 2] == NULL || ft_chval(map, x + 1, y) == 1 || (int)ft_strlen(map[x + 2]) <= y)
 			return (1);
-	if ((map[x - 1][y] == '0' || map[x - 1][y] == ' '))
+	if (x - 1 >= 0 && (map[x - 1][y] == '0' || map[x - 1][y] == ' '))
 		if (x - 1 == 0 || ft_chval(map, x - 1, y) == 1 || (int)ft_strlen(map[x - 2]) <= y)
 			return (1);
 	return (0);
@@ -210,36 +227,41 @@ int		ft_check_sym(t_plr *plr, char **map, int *pl)
 	int err;
 
 	i = 0;
-	j = 0;
 	err = 0;
 	while(map[i])
 	{
 		j = 0;
+		if (map[i][0] == '\0')
+			return (5);
 		while (map[i][j])
 		{
-			if (ft_strchar("NSWE4120 ", map[i][j]) != 0)
+			if (map[i][j] == '0')
+				err += ft_chval(map, i, j);
+			if (ft_strchar("NSWE", map[i][j]) != 0)
 			{
-				if (map[i][j] == '0')
-					err += ft_chval(map, i, j); // for error 1
-				if (ft_strchar("NSWE", map[i][j]) != 0)
-				{
-					ft_init_plr(map[i][j], plr, i, j);
-					err += ft_chplr(map, i, j);
-					*pl += 1;
-				}
+				ft_init_plr(map[i][j], plr, i, j);
+				err += ft_chplr(map, i, j);
+				*pl += 1;
 			}
-			else if (map[i][0] == '\n')
-			{
-				err += 1;
-				printf("перенос = %d\n", map[i][j]);
-			}
-			else
-				return (5);
 			j++;
 		}
 		i++;
 	}
 	return (err);
+}
+
+int		ft_ch_sym(char *map)
+{
+	int i;
+
+	i = 0;
+	while (map[i])
+	{
+		if (ft_strchar("NSWE120 ", map[i]) == 0)
+			return (1);
+		i++;
+	}
+	return(0);
 }
 
 int		ft_check_map(t_map *map, t_list **l_map)
@@ -257,12 +279,12 @@ int		ft_check_map(t_map *map, t_list **l_map)
 	while (tmp)
 	{
 		map->map[++i] = tmp->content;
+		err += ft_ch_sym(map->map[i]);
 		tmp = tmp->next;
 	}
 	err += ft_check_sym(&map->plr, map->map, &plr);
 	if (plr != 1 || err != 0)
 		ft_error(err = 5);
-	// printf("check_map = %d", err);
 	return (err);
 }
 
@@ -281,7 +303,7 @@ int		ft_parser(char *fname, t_map *map)
 	l_map = NULL;
 	while (get_next_line(fd, &line) > 0)
 	{
-		if (*line == '\0')
+		if (*line == '\0' && l_map == NULL)
 			continue ;
 		if (c_flag++ < 8)
 		{
@@ -297,12 +319,12 @@ int		ft_parser(char *fname, t_map *map)
 	if ((err += ft_check_map(map, &l_map)) != 0)
 		ft_free_w(map->map);
 	// printf("%d", err);
-	// int i = 0;
-	// while (map->map[i])
-	// {
-	// 	ft_putendl_fd(map->map[i], 1);
-	// 	i++;
-	// }
+	int i = 0;
+	while (map->map[i])
+	{
+		ft_putendl_fd(map->map[i], 1);
+		i++;
+	}
 	ft_lst_free(&l_map);
 	return (err);
 }
