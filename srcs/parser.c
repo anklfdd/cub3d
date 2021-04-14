@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 22:07:07 by anastasia         #+#    #+#             */
-/*   Updated: 2021/04/07 22:34:16 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/14 21:19:41 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,23 +200,31 @@ void		ft_init_plr(char sym, t_plr *plr, int i, int j)
 	plr->y = j;
 	if (sym == 'N')
 	{
-		plr->dirx = 0;
-		plr->diry = 1;
+		plr->dirx = -1;
+		plr->diry = 0;
+		plr->planex = 0;
+		plr->planey = 0.66;
 	}
 	if (sym == 'S')
 	{
-		plr->dirx = 0;
-		plr->diry = -1;
+		plr->dirx = 1;
+		plr->diry = 0;
+		plr->planex = 0;
+		plr->planey = -0.66;
 	}
 	if (sym == 'W')
 	{
-		plr->dirx = -1;
-		plr->diry = 0;
+		plr->dirx = 0;
+		plr->diry = -1;
+		plr->planex = -0.66;
+		plr->planey = 0;
 	}
 	if (sym == 'E')
 	{
-		plr->dirx = 1;
-		plr->diry = 0;
+		plr->dirx = 0;
+		plr->diry = 1;
+		plr->planex = 0.66;
+		plr->planey = 0;
 	}
 }
 

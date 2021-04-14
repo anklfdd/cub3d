@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 17:43:38 by anastasia         #+#    #+#             */
-/*   Updated: 2021/03/27 22:03:50 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/14 20:45:37 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct	s_mlx
 	void		*mlx;
 	void		*mlx_win;
 	void		*img;
-    char		*addr;
+    int			*addr;
     int			bpp;
     int			llen;
     int			endian;
@@ -59,6 +59,8 @@ typedef struct	s_plr
 	double		y;
 	double		dirx;
 	double		diry;
+	double		planex;
+	double		planey;
 
 }				t_plr;
 
