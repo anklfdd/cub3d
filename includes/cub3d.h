@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 17:43:38 by anastasia         #+#    #+#             */
-/*   Updated: 2021/04/14 20:45:37 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/15 22:20:47 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,6 @@ typedef struct	s_map
 int				ft_parser(char *fname, t_map *map);
 void			ft_error(int code);
 void			init_mlx(t_map	*map);
+int				texture_init(char *tex_name, t_mlx *mlx);
 
 #endif
