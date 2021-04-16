@@ -1,9 +1,9 @@
 R 1920 1080
 NO ./texture/bluestone.xpm
-SO ./texture/iii
-WE ./texture/iii
-EA ./texture/iii
-S ./texture/iii
+SO ./texture/bluestone.xpm
+WE ./texture/bluestone.xpm
+EA ./texture/bluestone.xpm
+S ./texture/bluestone.xpm
 F 220,100,0
 C 225,30,25
     1111111111111111111111111

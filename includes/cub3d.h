@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 17:43:38 by anastasia         #+#    #+#             */
-/*   Updated: 2021/04/15 22:20:47 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/16 22:32:57 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 # include <fcntl.h>
 # include <mlx.h>
 # include <math.h>
+
+typedef struct	s_tex
+{
+	int			*texture[5];
+	int			width[5];
+	int			height[5];
+}				t_tex;
 
 typedef struct	s_mlx
 {
@@ -38,15 +45,6 @@ typedef struct	s_window
 	int			height;
 }				t_window;
 
-typedef struct	s_wall
-{
-	char		*no;
-	char		*so;
-	char		*we;
-	char		*ea;
-	char		*spr;
-}				t_wall;
-
 typedef struct	s_color
 {
 	int			f;
@@ -64,19 +62,29 @@ typedef struct	s_plr
 
 }				t_plr;
 
+enum wall
+{
+	north,
+	south,
+	east,
+	west,
+	sprite
+};
+
 typedef struct	s_map
 {
 	char		**map;
 	t_color		color;
-	t_wall		wall;
+	char		*wall[5];
 	t_window	win;
 	t_mlx		mlx;
 	t_plr		plr;
+	t_tex		tex;
 }				t_map;
 
 int				ft_parser(char *fname, t_map *map);
 void			ft_error(int code);
 void			init_mlx(t_map	*map);
-int				texture_init(char *tex_name, t_mlx *mlx);
+int				texture_init(char **wall, t_tex *tex, t_mlx *mlx);
 
 #endif

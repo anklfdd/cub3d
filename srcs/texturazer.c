@@ -6,30 +6,24 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 21:17:25 by gavril            #+#    #+#             */
-/*   Updated: 2021/04/15 22:30:04 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/16 22:39:49 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		texture_init(char *tex_name, t_mlx *mlx)
+void	texture_init(char **wall, t_tex *tex, t_mlx *mlx)
 {
-	// void	*xvar;
-	// int		*texture;
-	// char	*ptr;
-	// int		w;
-	// int		h;
-	mlx = NULL;
+	void	*ptr;
+	int		bpp;
+	int		line_len;
+	int		endian;
 	
-	// xvar = NULL;
-	printf("%s\n", tex_name);
-	// ptr = mlx_xpm_file_to_image(mlx->mlx, tex_name, &w, &h);
-	// texture = mlx_xpm_to_image(mlx->mlx, &ptr, &w, &h);
-	// int	i = 0;
-	// while(i < 5)
-	// {
-	// 	printf(" %d ", texture[0]);
-	// 	i++;
-	// }
-	return (0);
+	int i = 0;
+	while (i < 5)
+	{
+		ptr = mlx_xpm_file_to_image(mlx->mlx, wall[i], &tex->width[i], &tex->height[i]);
+		tex->texture[i] = (int *)mlx_get_data_addr(ptr, &bpp, &line_len, &endian);
+		i++;
+	}
 }

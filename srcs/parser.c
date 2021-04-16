@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 22:07:07 by anastasia         #+#    #+#             */
-/*   Updated: 2021/04/14 21:19:41 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/16 22:30:11 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,15 +92,15 @@ int		ft_check_flag(char **word, t_map *map)
 	if (ft_strncmp(word[0], "R", 1) == 0)
 		return (ft_r(word, &(map->win)));
 	else if (ft_strncmp(word[0], "NO", 2) == 0)
-		return (ft_wall(word, &(map->wall.no)));
+		return (ft_wall(word, &(map->wall[north])));
 	else if (ft_strncmp(word[0], "SO", 2) == 0)
-		return (ft_wall(word, &(map->wall.so)));
+		return (ft_wall(word, &(map->wall[south])));
 	else if (ft_strncmp(word[0], "WE", 2) == 0)
-		return (ft_wall(word, &(map->wall.we)));
+		return (ft_wall(word, &(map->wall[west])));
 	else if (ft_strncmp(word[0], "EA", 2) == 0)
-		return (ft_wall(word, &(map->wall.ea)));
+		return (ft_wall(word, &(map->wall[east])));
 	else if (ft_strncmp(word[0], "S", 1) == 0)
-		return (ft_wall(word, &(map->wall.spr)));
+		return (ft_wall(word, &(map->wall[sprite])));
 	else if (ft_strncmp(word[0], "F", 1) == 0)
 		return (ft_color(word, &(map->color.f)));
 	else if (ft_strncmp(word[0], "C", 1) == 0)

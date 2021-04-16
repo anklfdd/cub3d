@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 20:04:19 by gavril            #+#    #+#             */
-/*   Updated: 2021/04/15 22:21:36 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/16 22:33:36 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,8 +267,10 @@ void	init_mlx(t_map	*map)
 
 	// map->plr.planex = 0;
 	// map->plr.planey = 0.66;
+	texture_init(map->wall, &map->tex, &map->mlx);
+
 	ft_rayc(map);
-	texture_init(map->wall.no, &map->mlx);
+	
 	// mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img, 0, 0);
 	mlx_hook(map->mlx.mlx_win, 17, 0, ft_close, 0);
 	mlx_hook(map->mlx.mlx_win, 2, 0, key_press, map);
