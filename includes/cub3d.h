@@ -85,6 +85,6 @@ typedef struct	s_map
 int				ft_parser(char *fname, t_map *map);
 void			ft_error(int code);
 void			init_mlx(t_map	*map);
-int				texture_init(char **wall, t_tex *tex, t_mlx *mlx);
+void			texture_init(char **wall, t_tex *tex, t_mlx *mlx);
 
 #endif

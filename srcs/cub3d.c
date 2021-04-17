@@ -16,7 +16,8 @@ int	main(int argc, char **argv)
 {
 	t_map *map;
 
-	map = (t_map *)malloc(sizeof(t_map));
+	// map = (t_map *)malloc(sizeof(t_map));
+	map = (t_map *)ft_calloc(1, sizeof(t_map));
 	if (argc == 2)
 	{
 		// printf("%d\n", ft_strncmp(&(argv[1][ft_strlen(argv[1]) - 4]), ".cub", 4)); //ft_printf
@@ -45,6 +46,6 @@ int	main(int argc, char **argv)
 	}
 	else
 		ft_putstr_fd("Что-то не подал, дружок\n", 0);
-	// free(map);
+	free(map);
 	return (0);
 }

@@ -312,7 +312,10 @@ int		ft_parser(char *fname, t_map *map)
 	while (get_next_line(fd, &line) > 0)
 	{
 		if (*line == '\0' && l_map == NULL)
+		{
+			free(line);
 			continue ;
+		}
 		if (c_flag++ < 8)
 		{
 			err += ft_check_line(line, map);
@@ -327,12 +330,12 @@ int		ft_parser(char *fname, t_map *map)
 	if ((err += ft_check_map(map, &l_map)) != 0)
 		ft_free_w(map->map);
 	// printf("%d", err);
-	int i = 0;
-	while (map->map[i])
-	{
-		ft_putendl_fd(map->map[i], 1);
-		i++;
-	}
+	// int i = 0;
+	// while (map->map[i])
+	// {
+	// 	ft_putendl_fd(map->map[i], 1);
+	// 	i++;
+	// }
 	ft_lst_free(&l_map);
 	return (err);
 }

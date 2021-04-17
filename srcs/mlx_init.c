@@ -18,14 +18,19 @@ int		ft_close(int param)
     exit(0);
 }
 
-void	clear_window(t_map *map)
+void	floor_ceil(t_map *map)
 {
 	int i;
 	
 	i = 0;
+	while (i < map->win.width * map->win.height / 2)
+	{
+		map->mlx.addr[i] = map->color.c;
+		i++;
+	}
 	while (i < map->win.width * map->win.height)
 	{
-		map->mlx.addr[i] = 0x000000;
+		map->mlx.addr[i] = map->color.f;
 		i++;
 	}
 }
@@ -33,19 +38,19 @@ void	clear_window(t_map *map)
 void	paint_line(int x, int start, int end, t_map *map, int side)
 {
 	int		color;
-	//S
-	if (side == 0)
-		color = 0xFF0000;
 	//N
-	if (side == 1)
+	if (side == north)
+		color = 0xFF0000;
+	//S
+	if (side == south)
 	{
 		color = 0x00FF00;
 	}
 	//E
-	if (side == 2)
+	if (side == east)
 		color = 0x0000FF;
 	//W
-	if (side == 3)
+	if (side == west)
 		color = 0xFF00FF;
 	
 	while (start < end)
@@ -75,12 +80,15 @@ int		ft_rayc(t_map *map)
 	int lineheight;
 	int drawend;
 	int x;
+	double wallx;
+	int texx;
+	double step;
+	double texpos;
+	int texy;
 	// double	texwidth;
 	// double	texheight;
-	
-	//plane крутить вместе с dir
 	x = 0;
-	clear_window(map);
+	floor_ceil(map);
 
 	// int i = 0;
 	// while (i < 8)
@@ -139,9 +147,9 @@ int		ft_rayc(t_map *map)
 				sidedistx += dltdistx;
 				mapx += stepx;
 				if (stepx > 0)
-					side = 0;
+					side = south;
 				else
-					side = 1;
+					side = north;
 				
 			}
 			else
@@ -149,26 +157,46 @@ int		ft_rayc(t_map *map)
 				sidedisty += dltdisty;
 				mapy += stepy;
 				if (stepy > 0)
-					side = 2;
+					side = east;
 				else
-					side = 3;
+					side = west;
 			}
 			if (map->map[mapx][mapy] == '1')
 				hit = 1;
-			if (side == 0 || side == 1)
-				prpwalldist = (mapx - map->plr.x + (1 - stepx) / 2) / raydirx;
-			else
-				prpwalldist = (mapy - map->plr.y + (1 - stepy) / 2) / raydiry;
-			lineheight = (int)(map->win.height / prpwalldist);
-			drawstart = -lineheight / 2 + map->win.height / 2;
-			if (drawstart < 0)
-				drawstart = 0;
-			drawend = lineheight / 2 + map->win.height / 2;
-			if (drawend >= map->win.height)
-				drawend = map->win.height - 1;
-			
+		
 		}
-		paint_line(x, drawstart, drawend, map, side);
+		if (side == 0 || side == 1)
+			prpwalldist = (mapx - map->plr.x + (1 - stepx) / 2) / raydirx;
+		else
+			prpwalldist = (mapy - map->plr.y + (1 - stepy) / 2) / raydiry;
+		lineheight = (int)(map->win.height / prpwalldist);
+		drawstart = -lineheight / 2 + map->win.height / 2;
+		if (drawstart < 0)
+			drawstart = 0;
+		drawend = lineheight / 2 + map->win.height / 2;
+		if (drawend >= map->win.height)
+			drawend = map->win.height - 1;
+
+		if (side == 0 || side == 1)
+			wallx = map->plr.y + prpwalldist * raydiry;
+		else
+			wallx = map->plr.x + prpwalldist * raydirx;
+		wallx -= (int)wallx;
+		texx = (int)(wallx * (double)(map->tex.width[side]));
+		if ((side <= 1 && raydirx > 0) || (side >= 2 && raydiry < 0))
+			texx = map->tex.width[side] - texx - 1;
+		step = 1.0 * map->tex.height[side] / lineheight;
+		texpos = (drawstart - map->win.height / 2 + lineheight / 2) * step;
+		int y;
+		y = drawstart;
+		while (y < drawend)
+		{
+			texy = (int)texpos & (map->tex.height[side] - 1);
+			texpos += step;
+			map->mlx.addr[x + map->win.width * y] = map->tex.texture[side][texx + texy * map->tex.width[side]];
+			y++;
+		}
+		// paint_line(x, drawstart, drawend, map, side);
 		x++;
 	}
 	mlx_put_image_to_window(map->mlx.mlx, map->mlx.mlx_win, map->mlx.img, 0, 0);
@@ -192,7 +220,7 @@ int		key_press(int keycode, t_map *map)
 	// A
 	if (keycode == 0)
 	{
-		if (map->map[(int)(map->plr.x + map->plr.planex * 0.3)][(int)map->plr.y] != '1')
+		if (map->map[(int)(map->plr.x - map->plr.planex * 0.3)][(int)map->plr.y] != '1')
 			map->plr.x -= map->plr.planex * 0.1;
 		if (map->map[(int)(map->plr.x)][(int)(map->plr.y + map->plr.planey * 0.3)] != '1')
 			map->plr.y -= map->plr.planey * 0.1;

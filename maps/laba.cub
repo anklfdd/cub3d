@@ -1,11 +1,12 @@
 R 1920 1080
 NO ./texture/bluestone.xpm
-SO ./texture/bluestone.xpm
-WE ./texture/bluestone.xpm
-EA ./texture/bluestone.xpm
+SO ./texture/purplestone.xpm
+WE ./texture/greystone.xpm
+EA ./texture/redbrick.xpm
 S ./texture/bluestone.xpm
-F 220,100,0
-C 225,30,25
+F 0,0,0
+C 0,0,254
+
     1111111111111111111111111
     1000000000000000000000001
     1000000000000000000011111
