@@ -60,6 +60,18 @@ void	paint_line(int x, int start, int end, t_map *map, int side)
 	}
 }
 
+// int		paint_sprites(double *zbuffer, t_map *map)
+// {
+// 	int		i;
+
+// 	i = 0;
+// 	while(map.spr[i] != NULL)
+// 	{
+// 		i++;
+// 	}
+// 	return (0);
+// }
+
 int		ft_rayc(t_map *map)
 {
 	double camx;
@@ -85,6 +97,7 @@ int		ft_rayc(t_map *map)
 	double step;
 	double texpos;
 	int texy;
+	double *zbuffer;
 	// double	texwidth;
 	// double	texheight;
 	x = 0;
@@ -96,7 +109,7 @@ int		ft_rayc(t_map *map)
 	// 	texture[i].resize(texwidth * texheight);
 	// 	i++;
 	// }
-	
+	zbuffer = (double *)ft_calloc(map->win.width, sizeof(double));
 	while (x < map->win.width)
 	{
 		camx = 2 * x / (double)map->win.width - 1;
@@ -196,6 +209,8 @@ int		ft_rayc(t_map *map)
 			map->mlx.addr[x + map->win.width * y] = map->tex.texture[side][texx + texy * map->tex.width[side]];
 			y++;
 		}
+		zbuffer[x] = prpwalldist;
+		// paint_sprites(zbuffer, map);
 		// paint_line(x, drawstart, drawend, map, side);
 		x++;
 	}
@@ -233,7 +248,6 @@ int		key_press(int keycode, t_map *map)
 			map->plr.x -= map->plr.dirx * 0.1;
 		if (map->map[(int)(map->plr.x)][(int)(map->plr.y - map->plr.diry * 0.3)] != '1')
 			map->plr.y -= map->plr.diry * 0.1;
-		// map->plr.y = 0.01;
 	}
 	// D
 	if (keycode == 2)

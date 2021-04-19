@@ -71,6 +71,12 @@ enum wall
 	sprite
 };
 
+typedef struct	s_sprite
+{
+	int			x;
+	int			y;
+}				t_sprite;
+
 typedef struct	s_map
 {
 	char		**map;
@@ -80,6 +86,8 @@ typedef struct	s_map
 	t_mlx		mlx;
 	t_plr		plr;
 	t_tex		tex;
+	t_sprite	*spr;
+	size_t		cnt_spr;
 }				t_map;
 
 int				ft_parser(char *fname, t_map *map);

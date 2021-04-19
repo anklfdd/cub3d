@@ -228,43 +228,54 @@ void		ft_init_plr(char sym, t_plr *plr, int i, int j)
 	}
 }
 
-int		ft_check_sym(t_plr *plr, char **map, int *pl)
+int		ft_check_sym(t_map *map, int *pl)
 {
 	int i;
 	int j;
 	int err;
+	int u;
 
 	i = 0;
 	err = 0;
-	while(map[i])
+	u = map->cnt_spr;
+	while(map->map[i])
 	{
 		j = 0;
-		if (map[i][0] == '\0')
+		if (map->map[i][0] == '\0')
 			return (5);
-		while (map[i][j])
+		while (map->map[i][j])
 		{
-			if (map[i][j] == '0')
-				err += ft_chval(map, i, j);
-			if (ft_strchar("NSWE", map[i][j]) != 0)
+			if (map->map[i][j] == '0')
+				err += ft_chval(map->map, i, j);
+			if (map->map[i][j] == '2')
 			{
-				ft_init_plr(map[i][j], plr, i, j);
-				err += ft_chplr(map, i, j);
+				map->spr[u - 1].x = i;
+				map->spr[u - 1].y = j;
+				u--;
+			}
+			if (ft_strchar("NSWE", map->map[i][j]) != 0)
+			{
+				ft_init_plr(map->map[i][j], &(map->plr), i, j);
+				err += ft_chplr(map->map, i, j);
 				*pl += 1;
 			}
 			j++;
 		}
 		i++;
 	}
+	printf("cnt_spr = %zu u = %d\n", map->cnt_spr, u);
 	return (err);
 }
 
-int		ft_ch_sym(char *map)
+int		ft_ch_sym(char *map, size_t *cnt_spr)
 {
 	int i;
 
 	i = 0;
 	while (map[i])
 	{
+		if (map[i] == '2')
+			*cnt_spr += 1;
 		if (ft_strchar("NSWE120 ", map[i]) == 0)
 			return (1);
 		i++;
@@ -280,6 +291,7 @@ int		ft_check_map(t_map *map, t_list **l_map)
 	int plr;
 
 	err = 0;
+	map->cnt_spr = 0;
 	tmp = *l_map;
 	i = -1;
 	plr = 0;
@@ -287,12 +299,20 @@ int		ft_check_map(t_map *map, t_list **l_map)
 	while (tmp)
 	{
 		map->map[++i] = tmp->content;
-		err += ft_ch_sym(map->map[i]);
+		err += ft_ch_sym(map->map[i], &(map->cnt_spr));
 		tmp = tmp->next;
 	}
-	err += ft_check_sym(&map->plr, map->map, &plr);
+	//t_sprite spr[5];
+	map->spr = (t_sprite *)ft_calloc(map->cnt_spr, sizeof(t_sprite));
+	err += ft_check_sym(map, &plr);
 	if (plr != 1 || err != 0)
 		ft_error(err = 5);
+	// i = 0;
+	// while(i < map->cnt_spr)
+	// {
+	// 	printf("x = %d y = %d\n", map->spr[i].x, map->spr[i].y);
+	// 	i++;
+	// }
 	return (err);
 }
 
