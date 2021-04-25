@@ -59,7 +59,6 @@ typedef struct	s_plr
 	double		diry;
 	double		planex;
 	double		planey;
-
 }				t_plr;
 
 enum wall
@@ -94,5 +93,5 @@ int				ft_parser(char *fname, t_map *map);
 void			ft_error(int code);
 void			init_mlx(t_map	*map);
 void			texture_init(char **wall, t_tex *tex, t_mlx *mlx);
-
+int				paint_sprites(double *zbuffer, t_map *map);
 #endif

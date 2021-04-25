@@ -17,6 +17,7 @@ SRC				=	cub3d.c \
 					error.c \
 					mlx_init.c \
 					texturazer.c \
+					sprite.c \
 
 SRCS			=	$(addprefix $(SRCS_DIR), $(SRC))
 OBJS			=	$(addprefix $(OBJS_DIR), $(OBJ))

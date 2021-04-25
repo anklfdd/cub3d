@@ -35,43 +35,6 @@ void	floor_ceil(t_map *map)
 	}
 }
 
-void	paint_line(int x, int start, int end, t_map *map, int side)
-{
-	int		color;
-	//N
-	if (side == north)
-		color = 0xFF0000;
-	//S
-	if (side == south)
-	{
-		color = 0x00FF00;
-	}
-	//E
-	if (side == east)
-		color = 0x0000FF;
-	//W
-	if (side == west)
-		color = 0xFF00FF;
-	
-	while (start < end)
-	{
-		map->mlx.addr[map->win.width * start + x] = color;
-		start++;
-	}
-}
-
-// int		paint_sprites(double *zbuffer, t_map *map)
-// {
-// 	int		i;
-
-// 	i = 0;
-// 	while(map.spr[i] != NULL)
-// 	{
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
 int		ft_rayc(t_map *map)
 {
 	double camx;
@@ -210,11 +173,11 @@ int		ft_rayc(t_map *map)
 			y++;
 		}
 		zbuffer[x] = prpwalldist;
-		// paint_sprites(zbuffer, map);
-		// paint_line(x, drawstart, drawend, map, side);
 		x++;
 	}
+	paint_sprites(zbuffer, map);
 	mlx_put_image_to_window(map->mlx.mlx, map->mlx.mlx_win, map->mlx.img, 0, 0);
+	free(zbuffer);
 	return (0);
 }
 
