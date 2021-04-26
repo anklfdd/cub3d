@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anastasia <anastasia@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 17:43:38 by anastasia         #+#    #+#             */
-/*   Updated: 2021/04/16 22:32:57 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/26 23:01:06 by anastasia        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ typedef struct	s_mlx
 	void		*mlx;
 	void		*mlx_win;
 	void		*img;
-    int			*addr;
-    int			bpp;
-    int			llen;
-    int			endian;
+	int			*addr;
+	int			bpp;
+	int			llen;
+	int			endian;
 }				t_mlx;
 
 typedef struct	s_window
@@ -61,7 +61,7 @@ typedef struct	s_plr
 	double		planey;
 }				t_plr;
 
-enum wall
+enum				e_wall
 {
 	north,
 	south,

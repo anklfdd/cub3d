@@ -1,30 +1,42 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprite.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anastasia <anastasia@student.42.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/26 23:08:49 by anastasia         #+#    #+#             */
+/*   Updated: 2021/04/26 23:09:54 by anastasia        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 // int sprite()
 // map->spr[5].x
 //            .y
 
-int cast_sprite(t_map *map, double *zbuffer)    
+int			cast_sprite(t_map *map, double *zbuffer)    
 {
-	size_t i;
-	double sprx;
-	double spry;
-	double invdet;
-	double transx;
-	double transy;
-	int spr_scrn_x;
-	int spr_h;
-	int draw_start_y;
-	int draw_end_y;
-	int spr_w;
-	int draw_start_x;
-	int draw_end_x;
-	int stripe;
-	int texx;
-	int texy;
-	int y;
-	int d;
-	int	color;
+	size_t	i;
+	double	sprx;
+	double	spry;
+	double	invdet;
+	double	transx;
+	double	transy;
+	int		spr_scrn_x;
+	int		spr_h;
+	int		draw_start_y;
+	int		draw_end_y;
+	int		spr_w;
+	int		draw_start_x;
+	int		draw_end_x;
+	int		stripe;
+	int		texx;
+	int		texy;
+	int		y;
+	int		d;
+	int		color;
 
 	i = 0;
 	while (i < map->cnt_spr)

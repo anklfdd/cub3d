@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anastasia <anastasia@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 22:07:07 by anastasia         #+#    #+#             */
-/*   Updated: 2021/04/16 22:30:11 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/26 23:42:11 by anastasia        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		ft_cnt_words(char **word)
+int			ft_cnt_words(char **word)
 {
 	int		i;
 
@@ -22,7 +22,7 @@ int		ft_cnt_words(char **word)
 	return (i);
 }
 
-int		ft_r(char **word, t_window *win)
+int			ft_r(char **word, t_window *win)
 {
 	if (ft_cnt_words(word) != 3)
 		return (1);
@@ -45,9 +45,9 @@ int		ft_r(char **word, t_window *win)
 	return (0);
 }
 
-int		ft_wall(char **word, char **wall)
+int			ft_wall(char **word, char **wall)
 {
-	int fd;
+	int		fd;
 
 	if (ft_cnt_words(word) != 2)
 		return (1);
@@ -61,7 +61,7 @@ int		ft_wall(char **word, char **wall)
 	return (0);
 }
 
-int		ft_color(char **word, int *color)
+int			ft_color(char **word, int *color)
 {
 	int		i;
 	int		tmp_clr;
@@ -87,7 +87,7 @@ int		ft_color(char **word, int *color)
 	return (err);
 }
 
-int		ft_check_flag(char **word, t_map *map)
+int			ft_check_flag(char **word, t_map *map)
 {
 	if (ft_strncmp(word[0], "R", 1) == 0)
 		return (ft_r(word, &(map->win)));
@@ -108,7 +108,7 @@ int		ft_check_flag(char **word, t_map *map)
 	return (4);
 }
 
-int		ft_check_line(char *line, t_map *map)
+int			ft_check_line(char *line, t_map *map)
 {
 	char	**word;
 	int		err;
@@ -120,9 +120,9 @@ int		ft_check_line(char *line, t_map *map)
 	return (err);
 }
 
-int		ft_strchar(const char *str, int sym)
+int			ft_strchar(const char *str, int sym)
 {
-	int	ind;
+	int		ind;
 
 	ind = 0;
 	if (!str || !sym)
@@ -138,7 +138,7 @@ int		ft_strchar(const char *str, int sym)
 	return (0);
 }
 
-int		ft_angle(char **map, int x, int y)
+int			ft_angle(char **map, int x, int y)
 {
 	//map[x][y + 2] == '\0' for y + 1
 	if (map[x + 1] != NULL && (int)ft_strlen(map[x + 1]) - 2 >= y && y - 1 >= 0 && map[x + 1][y - 1] == ' ')
@@ -154,7 +154,7 @@ int		ft_angle(char **map, int x, int y)
 	return (0);
 }
 
-int		ft_chval(char **map, int x, int y)
+int			ft_chval(char **map, int x, int y)
 {
 	if (map[x][y] == ' ' || ft_angle(map, x, y) == 1)
 		return (1);
@@ -178,9 +178,9 @@ int		ft_chval(char **map, int x, int y)
 	return (0);
 }
 
-int		ft_chplr(char **map, int i, int j)
+int			ft_chplr(char **map, int i, int j)
 {
-	int res;
+	int		res;
 
 	res = 4;
 	if ((int)ft_strlen(map[i]) > j + 1 && ft_strchar("412", map[i][j + 1]) != 0)
@@ -228,17 +228,17 @@ void		ft_init_plr(char sym, t_plr *plr, int i, int j)
 	}
 }
 
-int		ft_check_sym(t_map *map, int *pl)
+int			ft_check_sym(t_map *map, int *pl)
 {
-	int i;
-	int j;
-	int err;
-	int u;
+	int		i;
+	int		j;
+	int		err;
+	int		u;
 
 	i = 0;
 	err = 0;
 	u = map->cnt_spr;
-	while(map->map[i])
+	while (map->map[i])
 	{
 		j = 0;
 		if (map->map[i][0] == '\0')
@@ -267,9 +267,9 @@ int		ft_check_sym(t_map *map, int *pl)
 	return (err);
 }
 
-int		ft_ch_sym(char *map, size_t *cnt_spr)
+int			ft_ch_sym(char *map, size_t *cnt_spr)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	while (map[i])
@@ -280,15 +280,15 @@ int		ft_ch_sym(char *map, size_t *cnt_spr)
 			return (1);
 		i++;
 	}
-	return(0);
+	return (0);
 }
 
-int		ft_check_map(t_map *map, t_list **l_map)
+int			ft_check_map(t_map *map, t_list **l_map)
 {
 	int		err;
-	t_list *tmp;
-	int i;
-	int plr;
+	t_list	*tmp;
+	int		i;
+	int		plr;
 
 	err = 0;
 	map->cnt_spr = 0;
@@ -316,7 +316,7 @@ int		ft_check_map(t_map *map, t_list **l_map)
 	return (err);
 }
 
-int		ft_parser(char *fname, t_map *map)
+int			ft_parser(char *fname, t_map *map)
 {
 	int		fd;
 	char	*line;
@@ -359,4 +359,3 @@ int		ft_parser(char *fname, t_map *map)
 	ft_lst_free(&l_map);
 	return (err);
 }
-
