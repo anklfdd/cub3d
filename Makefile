@@ -18,6 +18,7 @@ SRC				=	cub3d.c \
 					mlx_init.c \
 					texturazer.c \
 					sprite.c \
+					save_bmp.c \
 					comp_sprite.c \
 
 SRCS			=	$(addprefix $(SRCS_DIR), $(SRC))
