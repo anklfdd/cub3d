@@ -25,20 +25,11 @@ void	ft_swap(double *a, double *b, t_sprite *c, t_sprite *d)
 	*d = tmp2;
 }
 
-void	dist_sprites(double *zbuffer, t_map *map)
+void	sort_sprites(double *dist, t_map *map)
 {
 	size_t	i;
 	size_t	j;
-	double	*dist;
 
-	i = 0;
-	dist = (double *)ft_calloc(map->cnt_spr, sizeof(double));
-	while (i < map->cnt_spr)
-	{
-		dist[i] = ((map->plr.x - map->spr[i].x) * (map->plr.x - map->spr[i].x)
-				+ (map->plr.y - map->spr[i].y) * (map->plr.y - map->spr[i].y));
-		i++;
-	}
 	j = map->cnt_spr - 1;
 	while (j > 0)
 	{
@@ -50,6 +41,21 @@ void	dist_sprites(double *zbuffer, t_map *map)
 			i++;
 		}
 		j--;
+	}
+}
+
+void	dist_sprites(double *zbuffer, t_map *map)
+{
+	size_t	i;
+	double	*dist;
+
+	i = 0;
+	dist = (double *)ft_calloc(map->cnt_spr, sizeof(double));
+	while (i < map->cnt_spr)
+	{
+		dist[i] = ((map->plr.x - map->spr[i].x) * (map->plr.x - map->spr[i].x)
+				+ (map->plr.y - map->spr[i].y) * (map->plr.y - map->spr[i].y));
+		i++;
 	}
 	free(dist);
 	cast_sprite(map, zbuffer);

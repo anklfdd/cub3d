@@ -14,29 +14,26 @@
 
 int	main(int argc, char **argv)
 {
-	t_map *map;
+	t_map	*map;
 
 	map = (t_map *)ft_calloc(1, sizeof(t_map));
-	if (argc == 2)
+	if (argc == 2 || argc == 3)
 	{
 		if (ft_strncmp(&(argv[1][ft_strlen(argv[1]) - 4]), ".cub", 4) == 0)
 		{
 			if (ft_parser(argv[1], map) == 0)
-				init_mlx(map);
+			{
+				if (argc == 3 && ft_strncmp(argv[2], "--save", 6) == 0)
+					save_bmp(map);
+				else
+					init_mlx(map);
+			}
 			else
 				exit(1);
 		}
 	}
-	else if (argc == 3)
-	{
-		if (ft_strncmp(&(argv[1][ft_strlen(argv[1]) - 4]), ".cub", 4) == 0)
-		{
-			if (ft_strncmp(argv[2], "--save", 6) == 0)
-				ft_putstr_fd("screen ok\n", 0);
-		}
-	}
 	else
-		ft_putstr_fd("Что-то не подал, дружок\n", 0);
+		ft_putstr_fd("Странное количество аргументов, дружок\n", 0);
 	free(map);
 	return (0);
 }

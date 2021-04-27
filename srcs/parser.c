@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int			ft_cnt_words(char **word)
+int	ft_cnt_words(char **word)
 {
 	int		i;
 
@@ -22,7 +22,7 @@ int			ft_cnt_words(char **word)
 	return (i);
 }
 
-int			ft_r(char **word, t_window *win)
+int	ft_r(char **word, t_window *win)
 {
 	if (ft_cnt_words(word) != 3)
 		return (1);
@@ -45,13 +45,14 @@ int			ft_r(char **word, t_window *win)
 	return (0);
 }
 
-int			ft_wall(char **word, char **wall)
+int	ft_wall(char **word, char **wall)
 {
 	int		fd;
 
 	if (ft_cnt_words(word) != 2)
 		return (1);
-	if ((fd = open(word[1], O_RDONLY)) > 0)
+	fd = open(word[1], O_RDONLY);
+	if (fd > 0)
 	{
 		*wall = ft_strdup(word[1]);
 		close(fd);
@@ -61,7 +62,7 @@ int			ft_wall(char **word, char **wall)
 	return (0);
 }
 
-int			ft_color(char **word, int *color)
+int	ft_color(char **word, int *color)
 {
 	int		i;
 	int		tmp_clr;
@@ -77,17 +78,17 @@ int			ft_color(char **word, int *color)
 	{
 		tmp_clr = ft_atoi(clr[i]);
 		if (ft_count(tmp_clr) == ft_strlen(clr[i])
-		&& tmp_clr >= 0 && tmp_clr <= 255)
+			&& tmp_clr >= 0 && tmp_clr <= 255)
 			*color |= tmp_clr << ((2 - i) * 8);
 		else
 			err = 2;
 		i++;
 	}
 	ft_free_w(clr);
-	return (err);
+	return (ft_error(err));
 }
 
-int			ft_check_flag(char **word, t_map *map)
+int	ft_check_flag(char **word, t_map *map)
 {
 	if (ft_strncmp(word[0], "R", 1) == 0)
 		return (ft_r(word, &(map->win)));
@@ -108,19 +109,18 @@ int			ft_check_flag(char **word, t_map *map)
 	return (4);
 }
 
-int			ft_check_line(char *line, t_map *map)
+int	ft_check_line(char *line, t_map *map)
 {
 	char	**word;
 	int		err;
 
 	word = ft_split(line, ' ');
-	if ((err = ft_check_flag(word, map)) != 0)
-		ft_error(err);
+	err = ft_check_flag(word, map);
 	ft_free_w(word);
-	return (err);
+	return (ft_error(err));
 }
 
-int			ft_strchar(const char *str, int sym)
+int	ft_strchar(const char *str, int sym)
 {
 	int		ind;
 
@@ -138,9 +138,8 @@ int			ft_strchar(const char *str, int sym)
 	return (0);
 }
 
-int			ft_angle(char **map, int x, int y)
+int	ft_angle(char **map, int x, int y)
 {
-	//map[x][y + 2] == '\0' for y + 1
 	if (map[x + 1] != NULL && (int)ft_strlen(map[x + 1]) - 2 >= y && y - 1 >= 0 && map[x + 1][y - 1] == ' ')
 		return (1);
 	if (x - 1 >= 0 && y - 1 >= 0 && map[x - 1][y - 1] == ' ')
@@ -154,31 +153,32 @@ int			ft_angle(char **map, int x, int y)
 	return (0);
 }
 
-int			ft_chval(char **map, int x, int y)
+int	ft_chval(char **map, int x, int y)
 {
 	if (map[x][y] == ' ' || ft_angle(map, x, y) == 1)
 		return (1);
-	map[x][y] = '4';
-	if ((int)ft_strlen(map[x]) - 1 > y && (map[x][y + 1] == '0' || map[x][y + 1] == ' '))
+	if (map[x][y] != '2')
+		map[x][y] = '4';
+	if ((int)ft_strlen(map[x]) - 1 > y && (map[x][y + 1] == '0' || map[x][y + 1] == ' ' || map[x][y + 1] == '2'))
 		if (map[x][y + 2] == '\0' || ft_chval(map, x, y + 1) == 1)
 			return (1);
-	if (y - 1 >= 0 && (map[x][y - 1] == '0' || map[x][y - 1] == ' '))
+	if (y - 1 >= 0 && (map[x][y - 1] == '0' || map[x][y - 1] == ' ' || map[x][y - 1] == '2'))
 	{
 		if (y - 1 == 0 || ft_chval(map, x, y - 1) == 1)
 			return (1);
 	}
 	else if (y - 1 < 0)
 		return (1);
-	if (map[x + 1] != NULL && (map[x + 1][y] == '0' || map[x + 1][y] == ' '))
+	if (map[x + 1] != NULL && (map[x + 1][y] == '0' || map[x + 1][y] == ' ' || map[x + 1][y] == '2'))
 		if (map[x + 2] == NULL || ft_chval(map, x + 1, y) == 1 || (int)ft_strlen(map[x + 2]) <= y)
 			return (1);
-	if (x - 1 >= 0 && (map[x - 1][y] == '0' || map[x - 1][y] == ' '))
+	if (x - 1 >= 0 && (map[x - 1][y] == '0' || map[x - 1][y] == ' ' || map[x - 1][y] == '2'))
 		if (x - 1 == 0 || ft_chval(map, x - 1, y) == 1 || (int)ft_strlen(map[x - 2]) <= y)
 			return (1);
 	return (0);
 }
 
-int			ft_chplr(char **map, int i, int j)
+int	ft_chplr(char **map, int i, int j)
 {
 	int		res;
 
@@ -192,9 +192,9 @@ int			ft_chplr(char **map, int i, int j)
 	if (i - 1 >= 0 && ft_strchar("412", map[i - 1][j]) != 0)
 		res -= 1;
 	return (res);
-} // чекает символы вокруг игрока
+}
 
-void		ft_init_plr(char sym, t_plr *plr, int i, int j)
+void	ft_init_plr(char sym, t_plr *plr, int i, int j)
 {
 	plr->x = i;
 	plr->y = j;
@@ -228,7 +228,7 @@ void		ft_init_plr(char sym, t_plr *plr, int i, int j)
 	}
 }
 
-int			ft_check_sym(t_map *map, int *pl)
+int	ft_check_sym(t_map *map, int *pl)
 {
 	int		i;
 	int		j;
@@ -242,7 +242,7 @@ int			ft_check_sym(t_map *map, int *pl)
 	{
 		j = 0;
 		if (map->map[i][0] == '\0')
-			return (5);
+			err = 5;
 		while (map->map[i][j])
 		{
 			if (map->map[i][j] == '0')
@@ -263,11 +263,10 @@ int			ft_check_sym(t_map *map, int *pl)
 		}
 		i++;
 	}
-	printf("cnt_spr = %zu u = %d\n", map->cnt_spr, u);
 	return (err);
 }
 
-int			ft_ch_sym(char *map, size_t *cnt_spr)
+int	ft_ch_sym(char *map, size_t *cnt_spr)
 {
 	int		i;
 
@@ -283,7 +282,7 @@ int			ft_ch_sym(char *map, size_t *cnt_spr)
 	return (0);
 }
 
-int			ft_check_map(t_map *map, t_list **l_map)
+int	ft_check_map(t_map *map, t_list **l_map)
 {
 	int		err;
 	t_list	*tmp;
@@ -302,21 +301,14 @@ int			ft_check_map(t_map *map, t_list **l_map)
 		err += ft_ch_sym(map->map[i], &(map->cnt_spr));
 		tmp = tmp->next;
 	}
-	//t_sprite spr[5];
 	map->spr = (t_sprite *)ft_calloc(map->cnt_spr, sizeof(t_sprite));
 	err += ft_check_sym(map, &plr);
 	if (plr != 1 || err != 0)
-		ft_error(err = 5);
-	// i = 0;
-	// while(i < map->cnt_spr)
-	// {
-	// 	printf("x = %d y = %d\n", map->spr[i].x, map->spr[i].y);
-	// 	i++;
-	// }
-	return (err);
+		err = 5;
+	return (ft_error(err));
 }
 
-int			ft_parser(char *fname, t_map *map)
+int	ft_parser(char *fname, t_map *map)
 {
 	int		fd;
 	char	*line;
@@ -345,17 +337,9 @@ int			ft_parser(char *fname, t_map *map)
 			ft_lstadd_back(&l_map, ft_lstnew(line));
 	}
 	ft_lstadd_back(&l_map, ft_lstnew(line));
-	// map->xs = x; map->ys = y; map[x][y] == '1'
-	//  || ((err += ft_chval(map->map, 1, 1)) != 0)
-	if ((err += ft_check_map(map, &l_map)) != 0)
+	err += ft_check_map(map, &l_map);
+	if (err != 0)
 		ft_free_w(map->map);
-	// printf("%d", err);
-	// int i = 0;
-	// while (map->map[i])
-	// {
-	// 	ft_putendl_fd(map->map[i], 1);
-	// 	i++;
-	// }
 	ft_lst_free(&l_map);
 	return (err);
 }
