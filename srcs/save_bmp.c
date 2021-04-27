@@ -1,78 +1,74 @@
 #include "cub3d.h"
 
-unsigned char	*createBitmapFileHeader (int height, int stride)
+unsigned char	*create_bitmap_file_header (int height, int stride)
 {
-	int				fileSize;
-	unsigned char	*fileHeader;
+	int				file_size;
+	unsigned char	*file_header;
 
-	fileSize = FILE_HEADER_SIZE + INFO_HEADER_SIZE + (stride * height);
-	fileHeader = (unsigned char *)ft_calloc(FILE_HEADER_SIZE, 1);
-	fileHeader[0] = (unsigned char)('B');
-	fileHeader[1] = (unsigned char)('M');
-	fileHeader[2] = (unsigned char)(fileSize);
-	fileHeader[3] = (unsigned char)(fileSize >> 8);
-	fileHeader[4] = (unsigned char)(fileSize >> 16);
-	fileHeader[5] = (unsigned char)(fileSize >> 24);
-	fileHeader[10] = (unsigned char)(FILE_HEADER_SIZE + INFO_HEADER_SIZE);
-	return (fileHeader);
+	file_size = FILE_HEADER_SIZE + INFO_HEADER_SIZE + (stride * height);
+	file_header = (unsigned char *)ft_calloc(FILE_HEADER_SIZE, 1);
+	file_header[0] = (unsigned char)('B');
+	file_header[1] = (unsigned char)('M');
+	file_header[2] = (unsigned char)(file_size);
+	file_header[3] = (unsigned char)(file_size >> 8);
+	file_header[4] = (unsigned char)(file_size >> 16);
+	file_header[5] = (unsigned char)(file_size >> 24);
+	file_header[10] = (unsigned char)(FILE_HEADER_SIZE + INFO_HEADER_SIZE);
+	return (file_header);
 }
 
-unsigned char	*createBitmapInfoHeader (int height, int width)
+unsigned char	*create_bitmap_info_header (int height, int width)
 {
-	static unsigned char	*infoHeader;
+	static unsigned char	*info_header;
 
-	infoHeader = (unsigned char *)ft_calloc(INFO_HEADER_SIZE, 1);
-	infoHeader[0] = (unsigned char)(INFO_HEADER_SIZE);
-	infoHeader[4] = (unsigned char)(width);
-	infoHeader[5] = (unsigned char)(width >> 8);
-	infoHeader[6] = (unsigned char)(width >> 16);
-	infoHeader[7] = (unsigned char)(width >> 24);
-	infoHeader[8] = (unsigned char)(height);
-	infoHeader[9] = (unsigned char)(height >> 8);
-	infoHeader[10] = (unsigned char)(height >> 16);
-	infoHeader[11] = (unsigned char)(height >> 24);
-	infoHeader[12] = (unsigned char)(1);
-	infoHeader[14] = (unsigned char)(BYTES_PER_PIXEL * 8);
-	return (infoHeader);
+	info_header = (unsigned char *)ft_calloc(INFO_HEADER_SIZE, 1);
+	info_header[0] = (unsigned char)(INFO_HEADER_SIZE);
+	info_header[4] = (unsigned char)(width);
+	info_header[5] = (unsigned char)(width >> 8);
+	info_header[6] = (unsigned char)(width >> 16);
+	info_header[7] = (unsigned char)(width >> 24);
+	info_header[8] = (unsigned char)(height);
+	info_header[9] = (unsigned char)(height >> 8);
+	info_header[10] = (unsigned char)(height >> 16);
+	info_header[11] = (unsigned char)(height >> 24);
+	info_header[12] = (unsigned char)(1);
+	info_header[14] = (unsigned char)(BPP * 8);
+	return (info_header);
 }
 
-int	generateBitmapImage (unsigned char *image, int height, int width, char *FileName)
+void	generate_bitmap_image(unsigned char *image, int h, int w, char *fn)
 {
-	int				widthInBytes;
 	unsigned char	*padding;
-	int				paddingSize;
-	int				stride;
 	int				imageFile;
 	unsigned char	*fileHeader;
-	unsigned char	*infoHeader;
+	unsigned char	*info_header;
 	int				i;
 
-
-	widthInBytes = width * BYTES_PER_PIXEL;
-	padding = (unsigned char *)ft_calloc(BYTES_PER_PIXEL, 1);
-    paddingSize = (4 - (widthInBytes) % 4) % 4;
-	stride = (widthInBytes) + paddingSize;
-	if ((imageFile = open(FileName, O_CREAT|O_RDWR,0777)) == -1)
-		return(7);
-    fileHeader = createBitmapFileHeader(height, stride);
-    write(imageFile, fileHeader, FILE_HEADER_SIZE);
-	infoHeader = createBitmapInfoHeader(height, width);
-    write(imageFile, infoHeader, INFO_HEADER_SIZE);
-	i = height - 1;
+	padding = (unsigned char *)ft_calloc(BPP, 1);
+	imageFile = open(fn, O_CREAT | O_RDWR, 0777);
+	fileHeader = create_bitmap_file_header(h, (w * BPP)
+			+ (4 - (w * BPP) % 4) % 4);
+	write(imageFile, fileHeader, FILE_HEADER_SIZE);
+	info_header = create_bitmap_info_header(h, w);
+	write(imageFile, info_header, INFO_HEADER_SIZE);
+	i = h - 1;
 	while (i >= 0)
 	{
-        write(imageFile, (image + (i * widthInBytes)), BYTES_PER_PIXEL * width);
-        write(imageFile, padding, paddingSize);
+		write(imageFile, (image + (i * w * BPP)), BPP * w);
+		write(imageFile, padding, (4 - (w * BPP) % 4) % 4);
 		i--;
 	}
 	close(imageFile);
-	return (0);
 }
 
-int				save_bmp(t_map *map)
+void	save_bmp(t_map *map)
 {
-    if (generateBitmapImage((unsigned char*)map->mlx.addr,
-	map->win.height, map->win.width, "screen.bmp") == 7)
-		return (7);
-	return (0);
+	map->mlx.mlx = mlx_init();
+	map->mlx.addr = (int *)ft_calloc(map->win.width
+			* map->win.height, sizeof(int));
+	texture_init(map->wall, &map->tex, &map->mlx);
+	ft_rayc(map);
+	generate_bitmap_image((unsigned char *)map->mlx.addr,
+		map->win.height, map->win.width, "screen.bmp");
+	ft_putstr_fd("Скриншот готов\n", 0);
 }

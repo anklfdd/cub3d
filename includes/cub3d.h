@@ -14,7 +14,7 @@
 # define CUB3D_H
 # define DISP_W 5120
 # define DISP_H 2880
-# define BYTES_PER_PIXEL 4
+# define BPP 4
 # define FILE_HEADER_SIZE 14
 # define INFO_HEADER_SIZE 40
 # include "libft.h"
@@ -108,11 +108,11 @@ typedef struct	s_map
 }				t_map;
 
 int				ft_parser(char *fname, t_map *map);
-void			ft_error(int code);
+int				ft_error(int code);
 void			init_mlx(t_map	*map);
 void			texture_init(char **wall, t_tex *tex, t_mlx *mlx);
 int				paint_sprites(double *zbuffer, t_map *map);
-int				save_bmp(t_map *map);
+void			save_bmp(t_map *map);
 int				ft_rayc(t_map *map);
 void			dist_sprites(double *zbuffer, t_map *map);
 int				cast_sprite(t_map *map, double *zbuffer);

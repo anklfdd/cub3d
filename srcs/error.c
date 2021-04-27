@@ -12,16 +12,19 @@
 
 #include "cub3d.h"
 
-void	ft_error(int code)
+int	ft_error(int code)
 {
-	if (code == 1)
+	if (code == 0)
+		return (0);
+	else if (code == 1)
 		ft_putstr_fd("Неправильное количество аргументов\n", 2);
-	if (code == 2)
+	else if (code == 2)
 		ft_putstr_fd("Неверный формат\n", 2);
-	if (code == 3)
+	else if (code == 3)
 		ft_putstr_fd("Файл не существует\n", 2);
-	if (code == 4)
+	else if (code == 4)
 		ft_putstr_fd("Нет одного из флагов\n", 2);
-	if (code == 5)
+	else if (code == 5)
 		ft_putstr_fd("Плохая карта\n", 2);
+	return (code);
 }
