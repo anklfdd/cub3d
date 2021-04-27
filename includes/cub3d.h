@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anastasia <anastasia@student.42.fr>        +#+  +:+       +#+        */
+/*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 17:43:38 by anastasia         #+#    #+#             */
-/*   Updated: 2021/04/26 23:01:06 by anastasia        ###   ########.fr       */
+/*   Updated: 2021/04/27 15:53:39 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-# define DISP_W 1920
-# define DISP_H 1080
+# define DISP_W 5120
+# define DISP_H 2880
 # include "libft.h"
 # include <stdio.h>
 # include <stddef.h>

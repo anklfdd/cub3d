@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anastasia <anastasia@student.42.fr>        +#+  +:+       +#+        */
+/*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 20:04:19 by gavril            #+#    #+#             */
-/*   Updated: 2021/04/26 23:36:17 by anastasia        ###   ########.fr       */
+/*   Updated: 2021/04/27 18:47:53 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,19 +61,17 @@ int		ft_rayc(t_map *map)
 	double	texpos;
 	int		texy;
 	double	*zbuffer;
+	int y;
+
 	// double	texwidth;
 	// double	texheight;
-	// int i = 0;
-	// while (i < 8)
-	// {
-	// 	texture[i].resize(texwidth * texheight);
-	// 	i++;
-	// }
+
 	x = 0;
 	zbuffer = (double *)ft_calloc(map->win.width, sizeof(double));
 	floor_ceil(map);
 	while (x < map->win.width)
 	{
+		hit = 0;
 		camx = 2 * x / (double)map->win.width - 1;
 		raydirx = map->plr.dirx + map->plr.planex * camx;
 		raydiry = map->plr.diry + map->plr.planey * camx;
@@ -112,7 +110,6 @@ int		ft_rayc(t_map *map)
 			stepy = 1;
 			sidedisty = (mapy + 1.0 - map->plr.y) * dltdisty;
 		}
-		hit = 0; // должен обнуляться в цикле, вынести выше
 		while (hit == 0)
 		{
 			if (sidedistx < sidedisty)
@@ -157,7 +154,6 @@ int		ft_rayc(t_map *map)
 			texx = map->tex.width[side] - texx - 1;
 		step = 1.0 * map->tex.height[side] / lineheight;
 		texpos = (drawstart - map->win.height / 2 + lineheight / 2) * step;
-		int y;
 		y = drawstart;
 		while (y < drawend)
 		{
