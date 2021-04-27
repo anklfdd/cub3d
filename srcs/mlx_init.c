@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 20:04:19 by gavril            #+#    #+#             */
-/*   Updated: 2021/04/27 18:47:53 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/27 19:51:37 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int		ft_rayc(t_map *map)
 	int		texy;
 	double	*zbuffer;
 	int y;
-
 	// double	texwidth;
 	// double	texheight;
 
@@ -71,7 +70,6 @@ int		ft_rayc(t_map *map)
 	floor_ceil(map);
 	while (x < map->win.width)
 	{
-		hit = 0;
 		camx = 2 * x / (double)map->win.width - 1;
 		raydirx = map->plr.dirx + map->plr.planex * camx;
 		raydiry = map->plr.diry + map->plr.planey * camx;
@@ -110,6 +108,7 @@ int		ft_rayc(t_map *map)
 			stepy = 1;
 			sidedisty = (mapy + 1.0 - map->plr.y) * dltdisty;
 		}
+		hit = 0;
 		while (hit == 0)
 		{
 			if (sidedistx < sidedisty)
@@ -166,7 +165,7 @@ int		ft_rayc(t_map *map)
 		zbuffer[x] = prpwalldist;
 		x++;
 	}
-	paint_sprites(zbuffer, map);
+	dist_sprites(zbuffer, map);
 	mlx_put_image_to_window(map->mlx.mlx, map->mlx.mlx_win, map->mlx.img, 0, 0);
 	free(zbuffer);
 	return (0);
@@ -179,7 +178,6 @@ int		key_press(int keycode, t_map *map)
 
 	if (keycode == 53)
 		exit(0);
-	//w
 	if (keycode == 13)
 	{
 		if (map->map[(int)(map->plr.x + map->plr.dirx
@@ -189,7 +187,6 @@ int		key_press(int keycode, t_map *map)
 		+ map->plr.diry * 0.3)] != '1')
 			map->plr.y += map->plr.diry * 0.1;
 	}
-	// A
 	if (keycode == 0)
 	{
 		if (map->map[(int)(map->plr.x - map->plr.planex
@@ -199,7 +196,6 @@ int		key_press(int keycode, t_map *map)
 		+ map->plr.planey * 0.3)] != '1')
 			map->plr.y -= map->plr.planey * 0.1;
 	}
-	//s
 	if (keycode == 1)
 	{
 		if (map->map[(int)(map->plr.x - map->plr.dirx
@@ -209,7 +205,6 @@ int		key_press(int keycode, t_map *map)
 		- map->plr.diry * 0.3)] != '1')
 			map->plr.y -= map->plr.diry * 0.1;
 	}
-	// D
 	if (keycode == 2)
 	{
 		if (map->map[(int)(map->plr.x + map->plr.planex
@@ -219,7 +214,6 @@ int		key_press(int keycode, t_map *map)
 		+ map->plr.planey * 0.3)] != '1')
 			map->plr.y += map->plr.planey * 0.1;
 	}
-	// <
 	if (keycode == 123)
 	{
 		olddirx = map->plr.dirx;
@@ -230,9 +224,7 @@ int		key_press(int keycode, t_map *map)
 		* cos(0.1) - map->plr.planey * sin(0.1);
 		map->plr.planey = oldplanex * sin(0.1)
 		+ map->plr.planey * cos(0.1);
-		// printf("dx = %f dy = %f px = %f py = %f\n", map->plr.dirx, map->plr.diry, map->plr.planex, map->plr.planey);
 	}
-	// >
 	if (keycode == 124)
 	{
 		olddirx = map->plr.dirx;
@@ -261,18 +253,6 @@ void	init_mlx(t_map *map)
 	map->mlx.addr = (int *)mlx_get_data_addr(map->mlx.img,
 	&map->mlx.bpp, &map->mlx.llen, &map->mlx.endian);
 	// offset = (y * llen + x * (bpp / 8));
-	// int y = 100;
-	// int x = 100;
-	// while (y++ < 200)
-	// {
-	// 	x = 100;
-	// 	while (x++ < 200)
-	// 		mlx_pixel_put(map->mlx.mlx, map->mlx.mlx_win, x, y, 0x00FF00FF);
-	// 	// mlx->addr[i] = 0xFF0000;
-	// 	// i++;
-	// }
-	// map->plr.planex = 0;
-	// map->plr.planey = 0.66;
 	texture_init(map->wall, &map->tex, &map->mlx);
 	ft_rayc(map);
 	// mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img, 0, 0);
