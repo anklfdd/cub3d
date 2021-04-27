@@ -32,7 +32,17 @@ int	main(int argc, char **argv)
 		if (ft_strncmp(&(argv[1][ft_strlen(argv[1]) - 4]), ".cub", 4) == 0)
 		{
 			if (ft_strncmp(argv[2], "--save", 6) == 0)
+			{
+				if (ft_parser(argv[1], map) == 0)
+				{
+					map->mlx.mlx = mlx_init();
+					map->mlx.addr = (int *)ft_calloc(map->win.width * map->win.height, sizeof(int));
+					texture_init(map->wall, &map->tex, &map->mlx);
+					ft_rayc(map);
+					save_bmp(map);
+				}
 				ft_putstr_fd("screen ok\n", 0);
+			}
 		}
 	}
 	else

@@ -167,7 +167,6 @@ int		ft_rayc(t_map *map)
 		x++;
 	}
 	paint_sprites(zbuffer, map);
-	mlx_put_image_to_window(map->mlx.mlx, map->mlx.mlx_win, map->mlx.img, 0, 0);
 	free(zbuffer);
 	return (0);
 }
@@ -247,6 +246,7 @@ int		key_press(int keycode, t_map *map)
 		+ map->plr.planey * cos(-0.1);
 	}
 	ft_rayc(map);
+	mlx_put_image_to_window(map->mlx.mlx, map->mlx.mlx_win, map->mlx.img, 0, 0);
 	return (0);
 }
 
@@ -275,6 +275,7 @@ void	init_mlx(t_map *map)
 	// map->plr.planey = 0.66;
 	texture_init(map->wall, &map->tex, &map->mlx);
 	ft_rayc(map);
+	mlx_put_image_to_window(map->mlx.mlx, map->mlx.mlx_win, map->mlx.img, 0, 0);
 	// mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img, 0, 0);
 	mlx_hook(map->mlx.mlx_win, 17, 0, ft_close, 0);
 	mlx_hook(map->mlx.mlx_win, 2, 0, key_press, map);
