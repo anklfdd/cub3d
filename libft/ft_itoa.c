@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anastasia <anastasia@student.42.fr>        +#+  +:+       +#+        */
+/*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 19:39:56 by gavril            #+#    #+#             */
-/*   Updated: 2021/03/10 17:17:27 by anastasia        ###   ########.fr       */
+/*   Updated: 2021/04/27 22:07:19 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char		*ft_reverse(char *str)
+static char	*ft_reverse(char *str)
 {
 	size_t	len;
 	size_t	ind;
@@ -34,9 +34,9 @@ static char		*ft_reverse(char *str)
 	return (str);
 }
 
-static char		*ft_strcpy(char *dst, char *src)
+static char	*ft_strcpy(char *dst, char *src)
 {
-	int ind;
+	int	ind;
 
 	ind = 0;
 	if (!src || !dst)
@@ -50,9 +50,9 @@ static char		*ft_strcpy(char *dst, char *src)
 	return (dst);
 }
 
-size_t			ft_count(long int n)
+size_t	ft_count(long int n)
 {
-	size_t		count;
+	size_t	count;
 
 	count = 0;
 	if (n == 0)
@@ -70,14 +70,13 @@ size_t			ft_count(long int n)
 	return (count);
 }
 
-char			*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	size_t	ind;
 	char	*str;
 
 	ind = 0;
-	if (!(str = (char*)malloc(sizeof(char) * (ft_count(n) + 1))))
-		return (0);
+	str = (char *)malloc(sizeof(char) * (ft_count(n) + 1));
 	if (n == -2147483648)
 		return (ft_strcpy(str, "-2147483648"));
 	if (n < 0)

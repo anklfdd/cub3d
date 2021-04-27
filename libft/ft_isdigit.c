@@ -6,13 +6,13 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 17:34:28 by gavril            #+#    #+#             */
-/*   Updated: 2020/11/15 18:44:34 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/27 22:07:32 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isdigit(int sym)
+int	ft_isdigit(int sym)
 {
 	if (sym >= '0' && sym <= '9')
 		return (1);

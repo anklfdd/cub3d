@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 21:26:55 by gavril            #+#    #+#             */
-/*   Updated: 2020/11/15 17:56:02 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/27 22:03:54 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*ft_memchr(const void *str, int asc, size_t num)
 	unsigned char	*string_str;
 	size_t			ind;
 
-	string_str = (unsigned char*)str;
+	string_str = (unsigned char *)str;
 	ind = 0;
 	while (ind != num)
 	{

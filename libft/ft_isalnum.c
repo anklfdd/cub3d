@@ -6,17 +6,17 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 17:53:58 by gavril            #+#    #+#             */
-/*   Updated: 2020/11/15 18:44:24 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/27 22:08:03 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isalnum(int sym)
+int	ft_isalnum(int sym)
 {
-	if ((sym >= '0' && sym <= '9') ||
-	(sym >= 'A' && sym <= 'Z') ||
-	(sym >= 'a' && sym <= 'z'))
+	if ((sym >= '0' && sym <= '9')
+		|| (sym >= 'A' && sym <= 'Z')
+		|| (sym >= 'a' && sym <= 'z'))
 		return (1);
 	return (0);
 }

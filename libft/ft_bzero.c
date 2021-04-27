@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 19:22:54 by gavril            #+#    #+#             */
-/*   Updated: 2020/11/04 22:38:45 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/27 22:08:36 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_bzero(void *str, size_t num)
 	char	*string;
 	size_t	a;
 
-	string = (char*)str;
+	string = (char *)str;
 	a = 0;
 	while (a != num)
 	{

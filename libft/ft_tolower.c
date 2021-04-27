@@ -6,13 +6,13 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 18:47:59 by gavril            #+#    #+#             */
-/*   Updated: 2020/11/15 18:44:57 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/27 21:45:44 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_tolower(int sym)
+int	ft_tolower(int sym)
 {
 	if (sym >= 'A' && sym <= 'Z')
 		return (sym + 32);

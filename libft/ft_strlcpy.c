@@ -6,13 +6,13 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 19:56:48 by gavril            #+#    #+#             */
-/*   Updated: 2020/11/11 19:11:04 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/27 21:55:14 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t		ft_strlcpy(char *dst, const char *src, size_t sz)
+size_t	ft_strlcpy(char *dst, const char *src, size_t sz)
 {
 	size_t	ind;
 

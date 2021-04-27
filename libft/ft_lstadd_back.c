@@ -6,15 +6,15 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 19:26:44 by gavril            #+#    #+#             */
-/*   Updated: 2020/11/14 20:17:40 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/27 22:06:01 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list *last;
+	t_list	*last;
 
 	if (new && *lst)
 	{

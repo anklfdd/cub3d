@@ -6,13 +6,13 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 17:50:08 by gavril            #+#    #+#             */
-/*   Updated: 2020/11/05 21:04:19 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/27 22:08:43 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	int					ind;
 	int					sign;

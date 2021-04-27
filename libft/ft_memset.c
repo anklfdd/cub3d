@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 19:22:18 by gavril            #+#    #+#             */
-/*   Updated: 2020/11/04 22:39:18 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/27 22:02:10 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*ft_memset(void *str, int sym, size_t num)
 	char	*string;
 	size_t	a;
 
-	string = (char*)str;
+	string = (char *)str;
 	a = 0;
 	while (a != num)
 	{

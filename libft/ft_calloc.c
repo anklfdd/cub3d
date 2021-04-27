@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 21:05:17 by gavril            #+#    #+#             */
-/*   Updated: 2020/11/05 21:49:49 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/27 22:08:29 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	char *str;
+	char	*str;
 
-	if (!(str = malloc(size * count)))
-		return (NULL);
+	str = malloc(size * count);
 	ft_bzero(str, count * size);
 	return (str);
 }

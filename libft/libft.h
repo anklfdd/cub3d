@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:48:55 by gavril            #+#    #+#             */
-/*   Updated: 2021/03/22 18:00:48 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/27 21:26:18 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
 # include <unistd.h>
 # include <stdio.h>
 
-typedef struct		s_list
+typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
-}					t_list;
+}	t_list;
 
 int					ft_atoi(const char *str);
 int					ft_isalnum(int sym);
@@ -39,7 +39,7 @@ int					ft_strncmp(const char *str1, const char *str2, size_t num);
 int					ft_memcmp(const void *str1, const void *str2, size_t num);
 int					ft_lstsize(t_list *lst);
 void				*ft_memccpy(void *dst, const void *src, int asc,
-size_t num);
+						size_t num);
 void				ft_bzero(void *str, size_t num);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putnbr_fd(int n, int fd);
@@ -74,9 +74,8 @@ size_t				ft_count(long int n);
 t_list				*ft_lstnew(void *content);
 t_list				*ft_lstlast(t_list *lst);
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
-void (*del)(void *));
+						void (*del)(void *));
 size_t				ft_strchr_gnl(const char *str, int sym);
-
 char				*ft_strlcpy_gnl(char *dst, const char *src, size_t sz);
 int					get_next_line(int fd, char **line);
 #endif

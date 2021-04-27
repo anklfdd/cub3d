@@ -6,15 +6,15 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 20:35:11 by gavril            #+#    #+#             */
-/*   Updated: 2021/03/22 17:58:25 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/27 22:05:37 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		ft_lstclear(t_list **lst, void (*del)(void*))
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	t_list *clr;
+	t_list	*clr;
 
 	if (!*lst || !del)
 		return ;

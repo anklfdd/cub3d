@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 19:58:07 by gavril            #+#    #+#             */
-/*   Updated: 2020/11/04 22:36:21 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/27 21:53:32 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,15 @@
 
 char	*ft_strrchr(const char *str, int sym)
 {
-	int	ind;
+	int		ind;
+	char	*ret;
 
 	ind = ft_strlen(str);
 	while (ind != 0 && str[ind] != (char)sym)
 		ind--;
-	return (str[ind] != (char)sym ? NULL : (char*)str + ind);
+	if (str[ind] != (char)sym)
+		ret = NULL;
+	else
+		ret = (char *)str + ind;
+	return (ret);
 }

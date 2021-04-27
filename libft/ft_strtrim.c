@@ -6,15 +6,15 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 20:15:08 by gavril            #+#    #+#             */
-/*   Updated: 2020/11/11 21:46:16 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/27 21:47:57 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		ft_symset(const char *set, char sym)
+static int	ft_symset(const char *set, char sym)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (set[i])
@@ -26,7 +26,7 @@ static int		ft_symset(const char *set, char sym)
 	return (0);
 }
 
-char			*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	size_t	ind;
 	char	*res;
@@ -48,8 +48,7 @@ char			*ft_strtrim(char const *s1, char const *set)
 	{
 		len_trim--;
 	}
-	if (!(res = (char*)malloc(sizeof(char) * (len_trim - ind + 1))))
-		return (NULL);
+	res = (char *)malloc(sizeof(char) * (len_trim - ind + 1));
 	ft_strlcpy(res, s1 + ind, len_trim - ind + 1);
 	return (res);
 }

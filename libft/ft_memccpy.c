@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 20:28:26 by gavril            #+#    #+#             */
-/*   Updated: 2020/11/04 22:39:02 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/27 22:03:57 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	*ft_memccpy(void *dst, const void *src, int asc, size_t num)
 	unsigned char	*string_dst;
 	unsigned char	*string_src;
 
-	string_dst = (unsigned char*)dst;
-	string_src = (unsigned char*)src;
+	string_dst = (unsigned char *)dst;
+	string_src = (unsigned char *)src;
 	ind = 0;
 	while (ind < num)
 	{

@@ -6,13 +6,13 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 18:33:23 by gavril            #+#    #+#             */
-/*   Updated: 2020/11/04 22:13:16 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/27 22:07:25 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isprint(int sym)
+int	ft_isprint(int sym)
 {
 	if (sym >= 32 && sym <= 126)
 		return (1);

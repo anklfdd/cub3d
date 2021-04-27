@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/13 21:22:41 by gavril            #+#    #+#             */
-/*   Updated: 2020/11/13 21:54:52 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/27 22:01:00 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	long long int nbr;
+	long long int	nbr;
 
 	nbr = n;
 	if (nbr == -2147483648)
