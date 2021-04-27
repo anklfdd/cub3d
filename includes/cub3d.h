@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 17:43:38 by anastasia         #+#    #+#             */
-/*   Updated: 2021/04/27 15:53:39 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/27 20:47:35 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,21 @@ enum				e_wall
 	sprite
 };
 
+typedef struct	s_cast_sprite
+{
+	double		transy;
+	int			spr_scrn_x;
+	int			spr_h;
+	int			draw_start_y;
+	int			draw_end_y;
+	int			spr_w;
+	int			draw_start_x;
+	int			draw_end_x;
+	int			stripe;
+	int			texx;
+	int			texy;
+}				t_cast_spr;
+
 typedef struct	s_sprite
 {
 	int			x;
@@ -89,6 +104,7 @@ typedef struct	s_map
 	t_tex		tex;
 	t_sprite	*spr;
 	size_t		cnt_spr;
+	t_cast_spr	c_spr;
 }				t_map;
 
 int				ft_parser(char *fname, t_map *map);
@@ -98,4 +114,6 @@ void			texture_init(char **wall, t_tex *tex, t_mlx *mlx);
 int				paint_sprites(double *zbuffer, t_map *map);
 int				save_bmp(t_map *map);
 int				ft_rayc(t_map *map);
+void			dist_sprites(double *zbuffer, t_map *map);
+int				cast_sprite(t_map *map, double *zbuffer);
 #endif

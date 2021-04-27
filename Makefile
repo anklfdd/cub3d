@@ -6,7 +6,7 @@
 #    By: gavril <gavril@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/23 19:16:42 by anastasia         #+#    #+#              #
-#    Updated: 2021/04/27 16:59:30 by gavril           ###   ########.fr        #
+#    Updated: 2021/04/27 20:00:25 by gavril           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRC				=	cub3d.c \
 					texturazer.c \
 					sprite.c \
 					save_bmp.c \
+					comp_sprite.c \
 
 SRCS			=	$(addprefix $(SRCS_DIR), $(SRC))
 OBJS			=	$(addprefix $(OBJS_DIR), $(OBJ))
