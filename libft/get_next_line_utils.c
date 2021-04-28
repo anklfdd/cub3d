@@ -6,13 +6,13 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:18:36 by gavril            #+#    #+#             */
-/*   Updated: 2021/04/27 22:19:35 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/28 19:49:44 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strlcpy_gnl(char *dst, const char *src, size_t sz)
+char	*ft_strlcpy_gnl(char *dst, const char *src, size_t sz)
 {
 	size_t	ind;
 
@@ -31,7 +31,18 @@ char		*ft_strlcpy_gnl(char *dst, const char *src, size_t sz)
 	return (dst);
 }
 
-size_t		ft_strchr_gnl(const char *str, int sym)
+char	*strjoin_data_buf(char *data, char *buf)
+{
+	char	*tmp;
+
+	tmp = data;
+	data = ft_strjoin(tmp, buf);
+	free(tmp);
+	tmp = NULL;
+	return (data);
+}
+
+size_t	ft_strchr_gnl(const char *str, int sym)
 {
 	size_t	ind;
 

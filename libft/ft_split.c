@@ -6,13 +6,13 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 20:14:42 by gavril            #+#    #+#             */
-/*   Updated: 2021/04/27 22:22:14 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/28 21:32:27 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void		ft_free(char **str, size_t n)
+static void	ft_free(char **str, size_t n)
 {
 	while (n > 0)
 	{
@@ -24,7 +24,7 @@ static void		ft_free(char **str, size_t n)
 
 static size_t	ft_sym_count(char const *s, char c)
 {
-	size_t count;
+	size_t	count;
 
 	count = 0;
 	while (s[count] && s[count] != c)
@@ -32,13 +32,14 @@ static size_t	ft_sym_count(char const *s, char c)
 	return (count);
 }
 
-static char		*ft_words(char const *s, char c)
+static char	*ft_words(char const *s, char c)
 {
 	char	*str;
 	size_t	ind;
 
 	ind = 0;
-	if (!(str = ft_calloc(ft_sym_count(s, c) + 1, sizeof(char))))
+	str = ft_calloc(ft_sym_count(s, c) + 1, sizeof(char));
+	if (!str)
 		return (NULL);
 	while (*s && *s != c)
 	{
@@ -50,8 +51,8 @@ static char		*ft_words(char const *s, char c)
 
 static size_t	ft_word_count(char const *str, char c)
 {
-	size_t ind;
-	size_t amount;
+	size_t	ind;
+	size_t	amount;
 
 	ind = 0;
 	amount = 0;
@@ -71,15 +72,14 @@ static size_t	ft_word_count(char const *str, char c)
 	return (amount);
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**words;
 	size_t	ind;
 
 	if (!s)
 		return (NULL);
-	if (!(words = ft_calloc((ft_word_count(s, c) + 1), sizeof(char**))))
-		return (NULL);
+	words = ft_calloc((ft_word_count(s, c) + 1), sizeof(char **));
 	ind = 0;
 	while (*s)
 	{
@@ -87,7 +87,8 @@ char			**ft_split(char const *s, char c)
 			s++;
 		if (*s != c && *s != '\0')
 		{
-			if (!(words[ind++] = ft_words(s, c)))
+			words[ind] = ft_words(s, c);
+			if (!(words[ind++]))
 			{
 				ft_free(words, ft_word_count(s, c));
 				return (NULL);

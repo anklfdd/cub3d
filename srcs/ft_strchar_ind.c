@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   ft_strchar_ind.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/11 19:26:19 by gavril            #+#    #+#             */
-/*   Updated: 2021/04/27 22:08:18 by gavril           ###   ########.fr       */
+/*   Created: 2021/04/28 15:06:57 by gavril            #+#    #+#             */
+/*   Updated: 2021/04/28 16:27:21 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-void	ft_free_w(char **word)
+int	ft_strchar_ind(char *str, int sym)
 {
-	int	i;
+	int		ind;
 
-	i = 0;
-	while (word[i])
+	ind = 0;
+	if (!str || !sym)
+		return (0);
+	while (str[ind] != '\0')
 	{
-		free(word[i]);
-		word[i] = NULL;
-		i++;
+		if (str[ind] == sym)
+			return (ind + 1);
+		ind++;
 	}
-	free(word);
-	word = NULL;
+	if (sym == '\0')
+		return (ind + 1);
+	return (0);
 }

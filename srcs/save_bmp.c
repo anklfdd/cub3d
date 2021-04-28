@@ -67,7 +67,7 @@ void	save_bmp(t_map *map)
 	map->mlx.addr = (int *)ft_calloc(map->win.width
 			* map->win.height, sizeof(int));
 	texture_init(map->wall, &map->tex, &map->mlx);
-	ft_rayc(map);
+	ft_raycast(map);
 	generate_bitmap_image((unsigned char *)map->mlx.addr,
 		map->win.height, map->win.width, "screen.bmp");
 	ft_putstr_fd("Скриншот готов\n", 0);

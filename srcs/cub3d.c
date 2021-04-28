@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 19:22:27 by anastasia         #+#    #+#             */
-/*   Updated: 2021/04/27 17:18:22 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/28 21:56:09 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,18 @@ int	main(int argc, char **argv)
 			{
 				if (argc == 3 && ft_strncmp(argv[2], "--save", 6) == 0)
 					save_bmp(map);
-				else
+				else if (argc == 2)
 					init_mlx(map);
+				else
+					ft_putstr_fd("Странное количество аргументов, дружок\n", 0);
 			}
 			else
 				exit(1);
 		}
+		else
+			ft_putstr_fd("Странное количество аргументов, дружок\n", 0);
 	}
 	else
 		ft_putstr_fd("Странное количество аргументов, дружок\n", 0);
-	free(map);
 	return (0);
 }

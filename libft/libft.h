@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:48:55 by gavril            #+#    #+#             */
-/*   Updated: 2021/04/27 21:26:18 by gavril           ###   ########.fr       */
+/*   Updated: 2021/04/28 19:57:53 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,5 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 size_t				ft_strchr_gnl(const char *str, int sym);
 char				*ft_strlcpy_gnl(char *dst, const char *src, size_t sz);
 int					get_next_line(int fd, char **line);
+char				*strjoin_data_buf(char *data, char *buf);
 #endif
