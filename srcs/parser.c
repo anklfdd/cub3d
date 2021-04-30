@@ -35,7 +35,7 @@ int	ft_check_map(t_map *map, t_list **l_map)
 	tmp = *l_map;
 	i = -1;
 	plr = 0;
-	map->map = (char **)malloc(sizeof(char *) * (ft_lstsize(*l_map) + 1));
+	map->map = (char **)ft_calloc((ft_lstsize(*l_map) + 1), sizeof(char *));
 	while (tmp)
 	{
 		map->map[++i] = tmp->content;
@@ -62,11 +62,8 @@ int	get_next_line_in_cub(int fd, t_map *map)
 	while (get_next_line(fd, &line) > 0)
 	{
 		if (*line == '\0' && map->l_map == NULL)
-		{
 			free(line);
-			continue ;
-		}
-		if (c_flag++ < 8)
+		else if (c_flag++ < 8)
 		{
 			err += ft_check_line(line, map);
 			free(line);
@@ -74,6 +71,8 @@ int	get_next_line_in_cub(int fd, t_map *map)
 		else
 			ft_lstadd_back(&map->l_map, ft_lstnew(line));
 	}
+	if (map->l_map == NULL)
+		return (7);
 	ft_lstadd_back(&map->l_map, ft_lstnew(line));
 	return (err);
 }
@@ -84,6 +83,8 @@ int	ft_parser(char *fname, t_map *map)
 	int		err;
 
 	fd = open(fname, O_RDONLY);
+	if (fd < 0)
+		return (7);
 	err = 0;
 	err += get_next_line_in_cub(fd, map);
 	err += ft_check_map(map, &map->l_map);
