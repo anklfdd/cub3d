@@ -17,14 +17,14 @@ int	ft_chplr(char **map, int i, int j)
 	int		res;
 
 	res = 4;
-	if ((int)ft_strlen(map[i]) > j + 1
-		&& ft_strchar_ind("412", map[i][j + 1]) != 0)
+	if ((int)ft_strlen(map[i]) >= j + 1
+		&& ft_strchar_ind("4120NSWE", map[i][j + 1]) != 0)
 		res -= 1;
-	if (j - 1 >= 0 && ft_strchar_ind("412", map[i][j - 1]) != 0)
+	if (j - 1 >= 0 && ft_strchar_ind("4120NSWE", map[i][j - 1]) != 0)
 		res -= 1;
-	if (map[i + 2] != NULL && ft_strchar_ind("412", map[i + 1][j]) != 0)
+	if (map[i + 1] != NULL && ft_strchar_ind("4120NSWE", map[i + 1][j]) != 0)
 		res -= 1;
-	if (i - 1 >= 0 && ft_strchar_ind("412", map[i - 1][j]) != 0)
+	if (i - 1 >= 0 && ft_strchar_ind("4120NSWE", map[i - 1][j]) != 0)
 		res -= 1;
 	return (res);
 }
@@ -49,8 +49,8 @@ void	ft_sym_w_e(char sym, t_plr *plr)
 
 void	ft_init_plr(char sym, t_plr *plr, int i, int j)
 {
-	plr->x = i;
-	plr->y = j;
+	plr->x = i + 0.5;
+	plr->y = j + 0.5;
 	if (sym == 'N')
 	{
 		plr->dirx = -1;

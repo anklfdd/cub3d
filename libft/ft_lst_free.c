@@ -21,6 +21,7 @@ void	ft_lst_free(t_list **lst)
 	while (*lst)
 	{
 		clr = (*lst)->next;
+		free((*lst)->content);
 		free(*lst);
 		*lst = clr;
 	}

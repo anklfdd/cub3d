@@ -34,14 +34,14 @@ int	ft_r(char **word, t_window *win)
 			win->width = DISP_W;
 	}
 	else
-		return (2);
+		return (-2);
 	if (ft_count(win->height) == ft_strlen(word[2]) && win->height > 0)
 	{
 		if (win->height > DISP_H)
 			win->height = DISP_H;
 	}
 	else
-		return (2);
+		return (-2);
 	return (0);
 }
 
@@ -62,6 +62,22 @@ int	ft_wall(char **word, char **wall)
 	return (0);
 }
 
+int	cnt_dot(char *str)
+{
+	int	cnt_dot;
+	int	i;
+
+	cnt_dot = 0;
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == ',')
+			cnt_dot++;
+		i++;
+	}
+	return (cnt_dot);
+}
+
 int	ft_color(char **word, int *color)
 {
 	int		i;
@@ -72,7 +88,7 @@ int	ft_color(char **word, int *color)
 	i = 0;
 	err = 0;
 	clr = ft_split(word[1], ',');
-	if (ft_cnt_words(word) != 2 || ft_cnt_words(clr) != 3)
+	if (ft_cnt_words(word) != 2 || ft_cnt_words(clr) != 3 || cnt_dot(word[1]) != 2)
 		err = 1;
 	while (clr[i])
 	{
@@ -85,7 +101,7 @@ int	ft_color(char **word, int *color)
 		i++;
 	}
 	ft_free_w(clr);
-	return (ft_error(err));
+	return (err);
 }
 
 int	ft_check_flag(char **word, t_map *map)

@@ -107,7 +107,8 @@ int	ft_raycast(t_map *map)
 		map->rc.zbuffer[map->rc.x] = map->rc.prpwalldist;
 		map->rc.x++;
 	}
-	dist_sprites(map->rc.zbuffer, map);
+	if (map->cnt_spr != 0)
+		dist_sprites(map->rc.zbuffer, map);
 	free(map->rc.zbuffer);
 	return (0);
 }

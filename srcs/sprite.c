@@ -57,6 +57,7 @@ void	dist_sprites(double *zbuffer, t_map *map)
 				+ (map->plr.y - map->spr[i].y) * (map->plr.y - map->spr[i].y));
 		i++;
 	}
+	sort_sprites(dist, map);
 	free(dist);
 	cast_sprite(map, zbuffer);
 }

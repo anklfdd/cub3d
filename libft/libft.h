@@ -72,6 +72,7 @@ size_t				ft_strlcpy(char *dst, const char *src, size_t sz);
 size_t				ft_strlen(const char *str);
 size_t				ft_count(long int n);
 t_list				*ft_lstnew(void *content);
+t_list				*ft_lstnew_size(void *content, size_t size);
 t_list				*ft_lstlast(t_list *lst);
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));

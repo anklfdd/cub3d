@@ -29,7 +29,7 @@ void	ft_code_13_0(t_map *map, int keycode)
 				* 0.3)][(int)map->plr.y] != '1')
 			map->plr.x -= map->plr.planex * 0.1;
 		if (map->map[(int)(map->plr.x)][(int)(map->plr.y
-		+ map->plr.planey * 0.3)] != '1')
+		- map->plr.planey * 0.3)] != '1')
 			map->plr.y -= map->plr.planey * 0.1;
 	}
 }
