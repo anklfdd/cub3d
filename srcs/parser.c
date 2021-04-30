@@ -54,14 +54,12 @@ int	ft_check_map(t_map *map, t_list **l_map)
 int	get_next_line_in_cub(int fd, t_map *map, char *line)
 {
 	int		c_flag;
-	// char	*line;
 	int		err;
 	char	fflag;
 
 	c_flag = 0;
 	fflag = 0;
 	err = 0;
-	line = NULL;
 	map->l_map = NULL;
 	while (get_next_line(fd, &line) > 0)
 	{

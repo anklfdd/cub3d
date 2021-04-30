@@ -2,6 +2,8 @@ R 1920 1080
 NO ./texture/redbrick.xpm
 SO ./texture/redbrick.xpm         
 EA ./texture/redbrick.xpm
+
+
 WE ./texture/redbrick.xpm
 S ./texture/redbrick.xpm
 F 255,0,255
