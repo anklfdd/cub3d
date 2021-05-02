@@ -28,7 +28,7 @@ int	ft_sym_in_map(char *map, size_t *cnt_spr)
 	return (0);
 }
 
-int	ft_c(t_map *map, int i, int *pl, int u)
+int	ft_c(t_map *map, int i, int *pl, int *u)
 {
 	int		j;
 
@@ -36,13 +36,13 @@ int	ft_c(t_map *map, int i, int *pl, int u)
 	while (map->map[i][j])
 	{
 		if (map->map[i][j] == '0')
-			if (ft_chval(map->map, i, j) != 0)
+			if (new_ff(map->map, i, j) != 0)
 				return (9);
 		if (map->map[i][j] == '2')
 		{
-			map->spr[u - 1].x = i;
-			map->spr[u - 1].y = j;
-			u--;
+			map->spr[*u - 1].x = i;
+			map->spr[*u - 1].y = j;
+			*u -= 1;
 		}
 		if (ft_strchar_ind("NSWE", map->map[i][j]) != 0)
 		{
@@ -72,7 +72,7 @@ int	ft_init_map(t_map *map, int *pl)
 	{
 		if (map->map[i][0] == '\0')
 			return (5);
-		err = ft_c(map, i, pl, u);
+		err = ft_c(map, i, pl, &u);
 		if (err != 0)
 			return (err);
 		i++;

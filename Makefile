@@ -23,11 +23,11 @@ SRC				=	cub3d.c \
 					ft_player.c \
 					ft_validation.c \
 					ft_strchar_ind.c \
-					ft_floodfill.c \
 					ft_check_flags.c \
 					ft_key_press.c \
 					ft_raycast.c \
 					ft_comp_lineh.c \
+					new_ff.c \
 
 SRCS			=	$(addprefix $(SRCS_DIR), $(SRC))
 OBJS			=	$(addprefix $(OBJS_DIR), $(OBJ))

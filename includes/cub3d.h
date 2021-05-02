@@ -149,7 +149,6 @@ int				cast_sprite(t_map *map, double *zbuffer);
 int				ft_chplr(char **map, int i, int j);
 void			ft_init_plr(char sym, t_plr *plr, int i, int j);
 int				ft_strchar_ind(char *str, int sym);
-int				ft_chval(char **map, int x, int y);
 int				ft_check_flag(char **word, t_map *map);
 int				ft_init_map(t_map *map, int *pl);
 int				ft_sym_in_map(char *map, size_t *cnt_spr);
@@ -158,5 +157,6 @@ int				ft_raycast(t_map *map);
 void			floor_ceil(t_map *map);
 void			ft_comp_lineh(t_map *map);
 void			ft_comp_tex(t_map *map);
+int				new_ff(char **map, int i, int j);
 
 #endif

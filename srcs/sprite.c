@@ -53,8 +53,7 @@ void	dist_sprites(double *zbuffer, t_map *map)
 	dist = (double *)ft_calloc(map->cnt_spr, sizeof(double));
 	while (i < map->cnt_spr)
 	{
-		dist[i] = ((map->plr.x - map->spr[i].x) * (map->plr.x - map->spr[i].x)
-				+ (map->plr.y - map->spr[i].y) * (map->plr.y - map->spr[i].y));
+		dist[i] = ((map->plr.x - map->spr[i].x) * (map->plr.x - map->spr[i].x) + (map->plr.y - map->spr[i].y) * (map->plr.y - map->spr[i].y));
 		i++;
 	}
 	sort_sprites(dist, map);
