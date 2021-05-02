@@ -6,28 +6,28 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 14:47:17 by gavril            #+#    #+#             */
-/*   Updated: 2021/04/28 17:20:18 by gavril           ###   ########.fr       */
+/*   Updated: 2021/05/02 16:52:00 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_chplr(char **map, int i, int j)
-{
-	int		res;
+// int	ft_chplr(char **map, int i, int j)
+// {
+// 	int		res;
 
-	res = 4;
-	if ((int)ft_strlen(map[i]) >= j + 1
-		&& ft_strchar_ind("4120NSWE", map[i][j + 1]) != 0)
-		res -= 1;
-	if (j - 1 >= 0 && ft_strchar_ind("4120NSWE", map[i][j - 1]) != 0)
-		res -= 1;
-	if (map[i + 1] != NULL && ft_strchar_ind("4120NSWE", map[i + 1][j]) != 0)
-		res -= 1;
-	if (i - 1 >= 0 && ft_strchar_ind("4120NSWE", map[i - 1][j]) != 0)
-		res -= 1;
-	return (res);
-}
+// 	res = 4;
+// 	if ((int)ft_strlen(map[i]) >= j + 1
+// 		&& ft_strchar_ind("4120NSWE", map[i][j + 1]) != 0)
+// 		res -= 1;
+// 	if (j - 1 >= 0 && ft_strchar_ind("4120NSWE", map[i][j - 1]) != 0)
+// 		res -= 1;
+// 	if (map[i + 1] != NULL && ft_strchar_ind("4120NSWE", map[i + 1][j]) != 0)
+// 		res -= 1;
+// 	if (i - 1 >= 0 && ft_strchar_ind("4120NSWE", map[i - 1][j]) != 0)
+// 		res -= 1;
+// 	return (res);
+// }
 
 void	ft_sym_w_e(char sym, t_plr *plr)
 {

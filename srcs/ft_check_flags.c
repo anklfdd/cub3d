@@ -6,21 +6,11 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 15:18:11 by gavril            #+#    #+#             */
-/*   Updated: 2021/04/28 15:19:31 by gavril           ###   ########.fr       */
+/*   Updated: 2021/05/02 17:23:37 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	ft_cnt_words(char **word)
-{
-	int		i;
-
-	i = 0;
-	while (word[i])
-		i++;
-	return (i);
-}
 
 int	ft_r(char **word, t_window *win)
 {
@@ -88,7 +78,8 @@ int	ft_color(char **word, int *color)
 	i = 0;
 	err = 0;
 	clr = ft_split(word[1], ',');
-	if (ft_cnt_words(word) != 2 || ft_cnt_words(clr) != 3 || cnt_dot(word[1]) != 2)
+	if (ft_cnt_words(word) != 2 || ft_cnt_words(clr) != 3
+		|| cnt_dot(word[1]) != 2)
 		err = 1;
 	while (clr[i])
 	{

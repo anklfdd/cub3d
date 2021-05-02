@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 17:43:38 by anastasia         #+#    #+#             */
-/*   Updated: 2021/04/28 21:47:08 by gavril           ###   ########.fr       */
+/*   Updated: 2021/05/02 17:31:15 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,13 @@ typedef struct s_rayc
 	int		y;
 }	t_rayc;
 
+typedef struct s_flag
+{
+	int		c_flag;
+	int		err;
+	char	fflag;
+}			t_flag;
+
 typedef struct s_map
 {
 	char		**map;
@@ -158,5 +165,6 @@ void			floor_ceil(t_map *map);
 void			ft_comp_lineh(t_map *map);
 void			ft_comp_tex(t_map *map);
 int				new_ff(char **map, int i, int j);
+int				ft_cnt_words(char **word);
 
 #endif

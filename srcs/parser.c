@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 22:07:07 by anastasia         #+#    #+#             */
-/*   Updated: 2021/04/28 20:18:10 by gavril           ###   ########.fr       */
+/*   Updated: 2021/05/02 17:51:49 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,47 +51,43 @@ int	ft_check_map(t_map *map, t_list **l_map)
 	return (ft_error(err));
 }
 
-int	get_next_line_in_cub(int fd, t_map *map, char *line)
+int	ft_flag(char *line, t_map *map, t_flag *flag)
 {
-	int		c_flag;
-	int		err;
-	char	fflag;
+	if (*line == '\0')
+		flag->fflag = 1;
+	else if (flag->c_flag++ < 8)
+	{
+		flag->fflag = 0;
+		if (ft_check_line(line, map) != 0)
+			return (4);
+	}
+	else
+	{
+		flag->fflag = 0;
+		ft_lstadd_back(&map->l_map, ft_lstnew_size(line, ft_strlen(line) + 1));
+	}
+	return (0);
+}
 
-	c_flag = 0;
-	fflag = 0;
-	err = 0;
-	map->l_map = NULL;
+int	get_next_line_in_cub(int fd, t_map *map, char *line, t_flag flag)
+{
 	while (get_next_line(fd, &line) > 0)
 	{
-		if (fflag == 1 && *line != '\0' && map->l_map != NULL)
+		if (flag.fflag == 1 && *line != '\0' && map->l_map != NULL)
 		{
 			free(line);
 			return (ft_error(6));
 		}
-		if (*line == '\0')
-			fflag = 1;
-		else if (c_flag++ < 8)
+		if (ft_flag(line, map, &flag) != 0)
 		{
-			fflag = 0;
-			if (ft_check_line(line, map) != 0)
-			{
-				free(line);
-				return (4);
-			}		
-		}
-		else
-		{
-			fflag = 0;
-			ft_lstadd_back(&map->l_map, ft_lstnew_size(line, ft_strlen(line) + 1));
+			free(line);
+			return (4);
 		}
 		free(line);
 	}
 	free(line);
 	if (map->l_map == NULL || *line != '\0')
 		return (ft_error(7));
-	//тогда в конце карты всегда должен быть энтер (любое колличество)
-	// if (*line != '\0')
-	// 	ft_lstadd_back(&map->l_map, ft_lstnew(line));
 	return (0);
 }
 
@@ -99,21 +95,20 @@ int	ft_parser(char *fname, t_map *map)
 {
 	int		fd;
 	char	*line;
+	t_flag	flag;
 
 	line = NULL;
 	fd = open(fname, O_RDONLY);
+	flag.c_flag = 0;
+	flag.fflag = 0;
+	flag.err = 0;
+	map->l_map = NULL;
 	if (fd < 0)
 		return (8);
-	if (get_next_line_in_cub(fd, map, line) != 0)
+	if (get_next_line_in_cub(fd, map, line, flag) != 0)
 		return (-1);
 	if (ft_check_map(map, &map->l_map) != 0)
-	// {
-	// 	ft_lst_free(&map->l_map);
 		return (-1);
-	// }
-	//разобраться как теперь фришить а то лики
-	// if (err != 0)
-	// 	ft_free_w(map->map);
 	ft_lst_free(&map->l_map);
 	return (0);
 }

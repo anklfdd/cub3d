@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 14:57:11 by gavril            #+#    #+#             */
-/*   Updated: 2021/04/28 16:47:14 by gavril           ###   ########.fr       */
+/*   Updated: 2021/05/02 17:25:46 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_c(t_map *map, int i, int *pl, int *u)
 	j = 0;
 	while (map->map[i][j])
 	{
-		if (map->map[i][j] == '0')
+		if (map->map[i][j] == '0' || map->map[i][j] == '2')
 			if (new_ff(map->map, i, j) != 0)
 				return (9);
 		if (map->map[i][j] == '2')
@@ -47,13 +47,10 @@ int	ft_c(t_map *map, int i, int *pl, int *u)
 		if (ft_strchar_ind("NSWE", map->map[i][j]) != 0)
 		{
 			ft_init_plr(map->map[i][j], &(map->plr), i, j);
-			if (ft_chplr(map->map, i, j) != 0)
+			if (new_ff(map->map, i, j) != 0)
 				return (10);
 			*pl += 1;
 		}
-		if (map->map[i][j] == '2')
-			if (ft_chplr(map->map, i, j) != 0)
-				return (10);
 		j++;
 	}
 	return (0);
@@ -78,6 +75,6 @@ int	ft_init_map(t_map *map, int *pl)
 		i++;
 	}
 	if (*pl != 1)
-		return (11);
+		return (10);
 	return (0);
 }

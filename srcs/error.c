@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 18:51:54 by gavril            #+#    #+#             */
-/*   Updated: 2021/04/27 18:46:40 by gavril           ###   ########.fr       */
+/*   Updated: 2021/05/02 17:21:04 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 int	ft_error(int code)
 {
-	if (code == 0)
-		return (0);
-	else if (code == -2)
+	if (code == -2)
 		ft_putstr_fd(" Неправильный формат числа\n", 2);
 	else if (code == -3)
 		ft_putstr_fd(" Не читаемая текстура\n", 2);
@@ -39,8 +37,6 @@ int	ft_error(int code)
 	else if (code == 9)
 		ft_putstr_fd(" Утекли\n", 2);
 	else if (code == 10)
-		ft_putstr_fd(" Игрок или спрайт плохо расположен\n", 2);
-	else if (code == 11)
-		ft_putstr_fd(" Нет игрока или биполярка\n", 2);
+		ft_putstr_fd(" Игрок плохо расположен\n", 2);
 	return (code);
 }

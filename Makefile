@@ -6,7 +6,7 @@
 #    By: gavril <gavril@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/23 19:16:42 by anastasia         #+#    #+#              #
-#    Updated: 2021/04/28 21:49:35 by gavril           ###   ########.fr        #
+#    Updated: 2021/05/02 17:24:49 by gavril           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC				=	cub3d.c \
 					ft_raycast.c \
 					ft_comp_lineh.c \
 					new_ff.c \
+					ft_cnt_words.c \
 
 SRCS			=	$(addprefix $(SRCS_DIR), $(SRC))
 OBJS			=	$(addprefix $(OBJS_DIR), $(OBJ))

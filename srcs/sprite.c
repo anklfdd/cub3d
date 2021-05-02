@@ -6,7 +6,7 @@
 /*   By: gavril <gavril@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 23:08:49 by anastasia         #+#    #+#             */
-/*   Updated: 2021/04/27 20:47:07 by gavril           ###   ########.fr       */
+/*   Updated: 2021/05/02 17:12:51 by gavril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void	dist_sprites(double *zbuffer, t_map *map)
 	dist = (double *)ft_calloc(map->cnt_spr, sizeof(double));
 	while (i < map->cnt_spr)
 	{
-		dist[i] = ((map->plr.x - map->spr[i].x) * (map->plr.x - map->spr[i].x) + (map->plr.y - map->spr[i].y) * (map->plr.y - map->spr[i].y));
+		dist[i] = ((map->plr.x - map->spr[i].x) * (map->plr.x - map->spr[i].x)
+				+ (map->plr.y - map->spr[i].y) * (map->plr.y - map->spr[i].y));
 		i++;
 	}
 	sort_sprites(dist, map);
